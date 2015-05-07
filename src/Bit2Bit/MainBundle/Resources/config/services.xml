@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="main.example" class="Bit2Bit\MainBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+    <parameters>
+        <parameter key="bit2bit.mainbundle.manager.user.class">Bit2Bit\MainBundle\Manager\UserManager</parameter>
+        <parameter key="bit2bit.mainbundle.entity.user.class">Bit2Bit\MainBundle\Entity\User</parameter>
+    </parameters>
+    <services>
+        <service id="bit2bit.mainbundle.user" class="%bit2bit.mainbundle.manager.user.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument>%bit2bit.mainbundle.entity.user.class%</argument>
+        </service>
+    </services>
+</container>

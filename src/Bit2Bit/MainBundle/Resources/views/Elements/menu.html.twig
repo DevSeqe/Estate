@@ -1,0 +1,10 @@
+<ul class="sidebar-menu">
+    <li class="header">MENU</li>
+    {% for item in menu %}
+    <li>
+        <a href="{{  path(item.route) }}">
+            <i class="{{ item.icon }}"></i> <span>{{ item.name }}</span>            
+        </a>
+    </li>    
+    {% endfor %}
+</ul>

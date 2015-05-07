@@ -1,0 +1,22 @@
+<li class="dropdown notifications-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell-o"></i>
+        <span class="label label-warning">1</span>
+    </a>
+    <ul class="dropdown-menu">
+        {#        <li class="header">You have 10 notifications</li>#}
+        {% for notification in notifications %}
+            <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                    <li>
+                        <a href="{{ notification.url }}">
+                            <i class="{{ notification.icon }} {{ notification.color }}"></i> {{ notification.text }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        {% endfor %}
+        <li class="footer"><a href="#">Pokaż wszystkie</a></li>
+    </ul>
+</li>

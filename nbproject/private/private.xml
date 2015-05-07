@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Projekty/eatfit/app/config/parameters.yml</file>
+            <file>file:/D:/Projekty/eatfit/src/EatFit/MainBundle/Resources/config/doctrine/User.orm.xml</file>
+            <file>file:/D:/Projekty/eatfit/vendor/friendsofsymfony/user-bundle/Model/User.php</file>
+            <file>file:/D:/Projekty/eatfit/vendor/friendsofsymfony/user-bundle/Controller/SecurityController.php</file>
+            <file>file:/D:/Projekty/eatfit/vendor/friendsofsymfony/user-bundle/Controller/ProfileController.php</file>
+            <file>file:/D:/Projekty/eatfit/app/config/security.yml</file>
+            <file>file:/D:/Projekty/eatfit/app/AppKernel.php</file>
+            <file>file:/D:/Projekty/eatfit/app/config/config.yml</file>
+            <file>file:/D:/Projekty/eatfit/src/EatFit/MainBundle/Model/User.php</file>
+            <file>file:/D:/Projekty/eatfit/app/config/config_prod.yml</file>
+        </group>
+    </open-files>
+</project-private>
