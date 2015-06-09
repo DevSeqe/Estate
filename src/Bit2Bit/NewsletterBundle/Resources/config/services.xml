@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="newsletter.example" class="Bit2Bit\NewsletterBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+<parameters><parameter key="bit2bit.newsletterbundle.manager.message.class">Bit2Bit\NewsletterBundle\Manager\MessageManager</parameter><parameter key="bit2bit.newsletterbundle.entity.message.class">Bit2Bit\NewsletterBundle\Entity\Message</parameter><parameter key="bit2bit.newsletterbundle.manager.subscriber.class">Bit2Bit\NewsletterBundle\Manager\SubscriberManager</parameter><parameter key="bit2bit.newsletterbundle.entity.subscriber.class">Bit2Bit\NewsletterBundle\Entity\Subscriber</parameter></parameters><services><service id="bit2bit.newsletterbundle.message" class="%bit2bit.newsletterbundle.manager.message.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.newsletterbundle.entity.message.class%</argument></service><service id="bit2bit.newsletterbundle.subscriber" class="%bit2bit.newsletterbundle.manager.subscriber.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.newsletterbundle.entity.subscriber.class%</argument></service></services></container>

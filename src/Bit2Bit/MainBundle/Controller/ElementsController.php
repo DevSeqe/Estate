@@ -14,7 +14,9 @@ class ElementsController extends Controller
         
         $menuGenerator->add('Pulpit', 'panel_dashboard', 'fa fa-dashboard')
                 ->add('Użytkownicy', 'panel_users', 'fa fa-group')
-                ->add('Ustawienia', 'admin_settings', 'fa fa-cogs', 'ROLE_ADMIN');
+                ->add('Ustawienia', 'admin_settings', 'fa fa-cogs', 'ROLE_ADMIN')
+                ->add('Subskrybenci', 'admin_subscriber', 'fa fa-at', 'ROLE_ADMIN')
+                ->add('Newsletter', 'admin_subscriber', 'fa fa-envelope', 'ROLE_ADMIN');
         
         
         return $this->render('MainBundle:Elements:menu.html.twig', array('menu'=>$menuGenerator->getMenu()));        

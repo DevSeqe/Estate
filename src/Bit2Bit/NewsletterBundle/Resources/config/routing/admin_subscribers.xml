@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    
+    <route id="admin_subscriber" path="/">
+        <default key="_controller">NewsletterBundle:Subscriber:index</default>    
+    </route>
+    
+    <route id="admin_subscriber_new" path="/new">
+        <default key="_controller">NewsletterBundle:Subscriber:new</default>    
+    </route>
+       
+    <route id="admin_subscriber_edit" pattern="/{id}/edit">
+        <default key="_controller">NewsletterBundle:Subscriber:edit</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_subscriber_toggle" pattern="/{id}/toggle">
+        <default key="_controller">NewsletterBundle:Subscriber:toggle</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_subscriber_remove" pattern="/{id}/remove">
+        <default key="_controller">NewsletterBundle:Subscriber:remove</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>
