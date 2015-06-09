@@ -7,27 +7,52 @@
 {% block content %}    
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header">
-                    <h3>Zestawienie użytkowników</h3>
+                    <i class="fa fa-group"></i>
+                    <h3 class="box-title">Zestawienie użytkowników</h3>
+                    {% if isAdmin %}
+                        <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Narzędzia">
+                            <div class="btn-group" >                            
+                                <a href="{{ path('admin_user_new') }}" class="btn btn-success btn-sm"><i class="fa fa-user-plus"></i> Nowy</a>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="box-body">
                     <table id="users" class="table table-striped table-bordered table-condensed">
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
                                 <th>Login</th>
                                 <th>E-mail</th>
-                                <th>Narzędzia</th>
+                                <th>Typ</th>
+                                <th>Aktywny</th>
+                                    {% if isAdmin %}
+                                    <th>Narzędzia</th>
+                                    {% endif %}
                             </tr>
                         </thead>
                         <tbody>
                             {% for user in users %}
                                 <tr>
                                     <td>{{ user.id }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.surname }}</td>
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.email }}</td>
-                                    <td></td>
+                                    <td>{% if user.hasRole('ROLE_ADMIN_TECH') %}<span class="label label-primary">Tech Admin</span>{% elseif user.hasRole('ROLE_ADMIN') %}<span class="label label-warning">Administrator</span>{% else %}<span class="label label-success">Użytkownik</span>{% endif %}</td>
+                                    <td>{% if user.isActive %}<span class="label label-success">TAK</span>{% else %}<span class="label label-danger">NIE</span>{% endif %}</td>
+                                    {% if isAdmin %}
+                                        <td>
+                                            <div class="btn-group">
+                                                <div class="btn btn-xs btn-primary btn-send-mail" data-url="{{ path('panel_users_send_mail', {id:user.id}) }}"><i class="fa fa-paper-plane"></i></div>
+                                                <div class="btn btn-xs btn-danger btn-remove" data-url="{{ path('admin_user_remove', {id:user.id}) }}"><i class="fa fa-trash"></i></div>
+                                            </div>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -54,7 +79,36 @@
                 "language": {
                     "url": "http://cdn.datatables.net/plug-ins/1.10.7/i18n/Polish.json"
                 }
-        });
+            });
+            $('.btn-send-mail').on('click', function () {
+                var url = $(this).data('url');
+                $.ajax({
+                    url: url, 
+                    success: function (result) {
+                        if(result.success){
+                            printAlert('success',result.msg,true);
+                        }
+                        else{
+                            printAlert('danger',result.msg,true);                            
+                        }
+                    }
+                });
+            });
+            $('.btn-remove').on('click',function(){
+                var row = $(this).closest('tr');
+                var user = row.find('td:nth-child(4)').text();
+                var url = $(this).data('url');
+                $(this).pModal({
+                    showOnStartup: true,
+                    title: 'Usuwanie użytkownika',
+                    content: 'Czy jesteś pewien, że chcesz usunąć użytkownika <strong>'+user+'</strong>?<br/>Zmiany są nieodwracalne.',
+                    confirm: 'Tak, chcę usunąć',
+                    decline: 'Nie, zostaw użytkownika',
+                    confirmCallback: function(){
+                        window.location = url;
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}

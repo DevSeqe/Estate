@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="bit2bit.configuratorbundle.manager.setting.class">Bit2Bit\ConfiguratorBundle\Manager\SettingManager</parameter>
+        <parameter key="bit2bit.configuratorbundle.entity.setting.class">Bit2Bit\ConfiguratorBundle\Entity\Setting</parameter>
+    </parameters>
+    <services>
+        <service id="b2b.configurator" class="Bit2Bit\ConfiguratorBundle\Services\ConfiguratorService">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+        </service>
+        
+        <service id="bit2bit.configuratorbundle.setting" class="%bit2bit.configuratorbundle.manager.setting.class%">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument>%bit2bit.configuratorbundle.entity.setting.class%</argument>
+        </service>
+    </services>
+    
+</container>

@@ -16,6 +16,7 @@ class User extends Base {
     protected $name;
     protected $surname;
     protected $isActive;
+    protected $registerKey;
 
     public function getId() {
         return $this->id;
@@ -47,5 +48,16 @@ class User extends Base {
         $this->isActive = $isActive;
         return $this;
     }
+    
+    function getRegisterKey() {
+        return $this->registerKey;
+    }
+
+    function setRegisterKey($registerKey) {
+        $this->registerKey = $registerKey;
+        return $this;
+    }
+
+
 
 }

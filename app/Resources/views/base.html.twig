@@ -13,6 +13,7 @@
         <!-- Theme style -->
         <link href="/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />    
         <link href="/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
+        <link href="/dist/css/custom.css" rel="stylesheet" type="text/css" />
         {% block css %}
         {% endblock  %}
     </head>
@@ -115,22 +116,22 @@
             <!-- Right side column. Contains the navbar and content of the page -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-{#                {% if title is defined %}#}
-                    <section class="content-header">
-                        <h1>
-                            {% block title %}{% endblock %}
-                        </h1>
-                        {#<ol class="breadcrumb">
-                            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                            <li><a href="#">Examples</a></li>
-                            <li class="active">Blank page</li>
-                        </ol>#}
-                    </section>
-{#                {% endif %}#}
+                {#                {% if title is defined %}#}
+                <section class="content-header">
+                    <h1>
+                    {% block title %}{% endblock %}
+                </h1>
+                {#<ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="#">Examples</a></li>
+                    <li class="active">Blank page</li>
+                </ol>#}
+            </section>
+            {#                {% endif %}#}
 
-                <!-- Main content -->
-                <section class="content">
-                    {% block content %}
+            <!-- Main content -->
+            <section class="content">
+                {% block content %}
                     <!-- Default box -->
                     <div class="box">
                         <div class="box-header with-border">
@@ -147,30 +148,42 @@
                             Footer
                         </div><!-- /.box-footer-->
                     </div><!-- /.box -->
-                    {% endblock %}
+                {% endblock %}
 
-                </section><!-- /.content -->
-            </div><!-- /.content-wrapper -->
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
 
-            {#<footer class="main-footer">
-              <div class="pull-right hidden-xs">
-                <b>Version</b> 2.0
-              </div>
-              <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-            </footer>#}
-        </div><!-- ./wrapper -->
+        {#<footer class="main-footer">
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 2.0
+          </div>
+          <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        </footer>#}
+    </div><!-- ./wrapper -->
+    <div class="alertCont col-md-6"></div>
 
-        <!-- jQuery 2.1.3 -->
-        <script src="/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-        <!-- Bootstrap 3.3.2 JS -->
-        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <!-- SlimScroll -->
-        <script src="/plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
-        <!-- FastClick -->
-        <script src='/plugins/fastclick/fastclick.min.js'></script>
-        <!-- AdminLTE App -->
-        <script src="/dist/js/app.min.js" type="text/javascript"></script>
-        {% block js %}
-        {% endblock %}
-    </body>
+    <!-- jQuery 2.1.3 -->
+    <script src="/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- SlimScroll -->
+    <script src="/plugins/slimScroll/jquery.slimScroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='/plugins/fastclick/fastclick.min.js'></script>
+    <!-- AdminLTE App -->
+    <script src="/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="/js/custom.js" type="text/javascript"></script>
+    <script src="/js/pmodal.bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+        {% for label, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                printAlert('{{ label }}','{{ flash }}',false);
+            {% endfor %}
+        {% endfor %}
+        });
+    </script>
+    {% block js %}
+    {% endblock %}
+</body>
 </html>

@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Użytkownicy
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-user-plus"></i>
+                    <h3 class="box-title">Dodaj użytkownika</h3>
+                    
+                    <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Wyjdź">
+                        <div class="btn-group" >                            
+                            <a href="{{ path('panel_users') }}" class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="box-body">
+                    {{ form(form) }}
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block css %}
+    
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}

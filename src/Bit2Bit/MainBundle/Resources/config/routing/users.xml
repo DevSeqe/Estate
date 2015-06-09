@@ -7,4 +7,10 @@
     <route id="panel_users" path="/">
         <default key="_controller">MainBundle:Users:index</default>    
     </route>
+    
+    <route id="panel_users_send_mail" path="/{id}/mail">
+        <default key="_controller">MainBundle:Users:sendActivationMail</default>    
+        <requirement key="id">\d+</requirement>
+    </route>
+    
 </routes>

@@ -1,1 +1,5 @@
-Tu będzie widok strony dla klienta.
+{% extends "::frontbase.html.twig" %}
+
+{% block content %}
+Tu będzie widok strony dla klienta. {{ setting.get('social:facebook') }}
+{% endblock %}

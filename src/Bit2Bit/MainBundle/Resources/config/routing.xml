@@ -4,6 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="@MainBundle/Resources/config/routing/dashboard.xml" prefix="/admin/panel" />    
-    <import resource="@MainBundle/Resources/config/routing/users.xml" prefix="/users" />    
+    <import resource="@MainBundle/Resources/config/routing/dashboard.xml" prefix="/panel" />    
+    <import resource="@MainBundle/Resources/config/routing/users.xml" prefix="/panel/users" />    
+    <import resource="@MainBundle/Resources/config/routing/admin_users.xml" prefix="/admin/users" />   
+    <import resource="@MainBundle/Resources/config/routing/admin_settings.xml" prefix="/admin/settings" />   
+    
+    <route id="activate_account" path="/{key}/activate">
+        <default key="_controller">MainBundle:Users:activateAccount</default>    
+    </route> 
 </routes>

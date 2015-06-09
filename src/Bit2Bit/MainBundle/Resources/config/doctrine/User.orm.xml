@@ -7,5 +7,6 @@
         <field name="name" column="name" type="string" length="150" nullable="true"/>
         <field name="surname" column="surname" type="string" length="150" nullable="true"/>                        
         <field name="isActive" type="boolean" nullable="true"/>       
+        <field name="registerKey" type="string" length="255" nullable="true"/>       
     </entity>
 </doctrine-mapping>

@@ -1,0 +1,82 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Ustawienia
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-group"></i>
+                    <h3 class="box-title">Ustawienia systemu</h3>                    
+                </div>
+
+                <div class="box-body">
+                    {% for setting in settings %}
+                        {% if ':' in setting.key %}
+                            <div class="row setting">
+                                <div class="col-xs-5">{{ setting.name }}</div>
+                                <div class="col-xs-5">{{ setting.value }}</div>
+                                <div class="col-xs-2"><div class="btn btn-primary btn-xs btn-change" data-id="{{ setting.id }}" data-val="{{ setting.value }}"><i class="fa fa-wrench"></i></div></div>
+                            </div>
+                        {% else%}
+                            <h2 class="page-header">{{ setting.name }}</h2>
+                            <blockquote>
+                                {{ setting.description }}
+                            </blockquote>
+                            <div class="row setting head-setting">
+                                <div class="col-xs-5">Nazwa</div>
+                                <div class="col-xs-5">Wartość</div>
+                                <div class="col-xs-2">Zmień</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" aria-hidden="true" id="changeSetting">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Zmień właściwość ustawienia</h4></div>
+                <div class="modal-body">
+                    <form id="changeSettingForm" action="{{ path('admin_settings_change') }}" method="POST">                        
+                        <div class="form-group">
+                            <input name="set_id" type="hidden" class="setting-id"/>
+                            <input name="set_value" type="text" class="form-control setting-value"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-change-proceed">Zmień</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Anuluj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+                {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+    <script type="text/javascript">
+        $(function () {
+            $('.btn-change').on('click',function(){
+                $('.setting-id').val($(this).data('id'));
+                $('.setting-value').val($(this).data('val'));
+                $('#changeSetting').modal('show');
+            });
+            $('.btn-change-proceed').on('click',function(){
+                $('#changeSettingForm').submit();
+            });
+        });
+    </script>
+{% endblock %}

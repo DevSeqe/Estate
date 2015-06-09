@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Zając Nieruchomości</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+                <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="/css/front-styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>        
+        <div class="headerCont">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <a href="/">
+                            <img src="/images/logo.png" class="img-responsive" alt="Zając Nieruchomości" />
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <div class="likeBoxCont">
+                            Tu będzie like box
+                        </div>
+                        <div>
+                            <a href="#" class="social-btn"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="social-btn"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="social-btn"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="social-btn"><i class="fa fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 phoneNumber">
+                        606 606 606
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="menuCont">
+            <div class="container">
+                <div class="row text-right">
+                    <a class="col-md-offset-6 col-md-2" href="/nieruchomosci">Nieruchomości</a>
+                    <a class="col-md-2" href="/o-nas">O nas</a>
+                    <a class="col-md-2" href="/kontakt">Kontakt</a>
+                </div>
+            </div>
+        </div>
+        <div class="mainCont">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="footerCont">
+            <div class="container fs">
+                <div class="row">
+                    <div class="col-xs-12 text-center footerSlogan">
+                        Chcesz otrzymywać na bieżąco informacje o nieruchomościach? <br/>
+                        Zapisz się do naszego newslettera
+                    </div>
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="input-group newsletter">
+                            <span class="input-group-addon left-addon">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                            <input type="email" class="form-control">
+                            <span class="input-group-addon right-addon">
+                                <button class="btn btn-red" type="button">Zapisz się!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4><span>Menu</span></h4>
+                        <ul class="footer-menu">
+                            <li><a href="#">nieruchomości</a></li>
+                            <li><a href="#">mieszkania</a></li>
+                            <li><a href="#">domy</a></li>
+                            <li><a href="#">działki</a></li>
+                            <li><a href="#">lokale</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4><span>Menu</span></h4>
+                        <ul class="footer-menu">
+                            <li><a href="#">zarząd</a></li>
+                            <li><a href="#">kariera</a></li>
+                            <li><a href="#">franczyza</a></li>
+                            <li><a href="#">kredyty</a></li>
+                            <li><a href="#">jak sprzedajemy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4><span>Znajdź nas</span></h4>
+                        <div class="socialBlock">
+                            <a href="#" class="social-btn foot"><i class="fa fa-facebook"></i></a>
+                            <a href="#" class="social-btn foot"><i class="fa fa-twitter"></i></a>
+                            <a href="#" class="social-btn foot"><i class="fa fa-google-plus"></i></a>
+                            <a href="#" class="social-btn foot"><i class="fa fa-youtube"></i></a>
+                        </div>
+                        <div class="copyright">Copyright &copy; native</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

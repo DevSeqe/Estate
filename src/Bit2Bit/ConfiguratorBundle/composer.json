@@ -1,0 +1,30 @@
+{
+    "name" : "bit2bit/basebundle",
+    "description" : "Entity generator.",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Seqe",
+        "email" : "dev@seqe.pl"
+    }],
+    "keywords" : [
+        "enitity generator command symfony"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Bit2Bit\\BaseBundle" : ""
+        }
+    },
+    "target-dir" : "Bit2Bit/BaseBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "0.9"
+        }
+    }
+}

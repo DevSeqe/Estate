@@ -1,0 +1,9 @@
+<div style="width:80%;margin:0px auto; min-height:450px; border: 1px solid #666;font-family:'Open Sans';">
+    <div style="background-color: #9CB0C7; text-align:center; color:white; border-bottom: 3px solid #637993;"><h2 style="margin-top:0px; padding-top: 15px;">Konfiguracja konta w systemie</h2></div>
+    <div style="background-color:white; padding:10px 15px;margin:0;">
+        Proszę wypełnić formularz pod wskazanym adresem, aby skonfigurować i aktywować swoje konto.
+        <div style="margin:15px 5px; background-color:#9CB0C7; border:2px solid #637993; border-radius:3px; padding: 15px 10px;">
+            <a href="{{ app.request.getSchemeAndHttpHost() ~ path('activate_account', {key:user.registerKey}) }}">Formularz aktywacyjny</a>
+        </div>
+    </div>
+</div>

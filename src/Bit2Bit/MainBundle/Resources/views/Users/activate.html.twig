@@ -1,0 +1,13 @@
+{% extends "::common.html.twig" %}
+
+{% block content %}
+    <div class="login-logo">
+        <a href="{{ path('front_homepage') }}"><b>Control</b>Panel</a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Aktywacja konta</p>
+        {{ form(form) }}
+
+    </div><!-- /.login-box-body -->
+    
+{% endblock content %}

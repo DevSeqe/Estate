@@ -2,25 +2,22 @@
 
 namespace Bit2Bit\MainBundle\Controller;
 
+use Bit2Bit\MainBundle\Base\MenuGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ElementsController extends Controller
 {   
     
     public function menuAction(){
-        $menu = array(
-            array(
-                'route' => 'panel_dashboard',
-                'name' => 'Pulpit',
-                'icon' => 'fa fa-dashboard'
-            ),
-            array(
-                'route' => 'panel_users',
-                'name' => 'Użytkownicy',
-                'icon' => 'fa fa-group'
-            ),
-        );
-        return $this->render('MainBundle:Elements:menu.html.twig', array('menu'=>$menu));        
+        $user = $this->get('security.context')->getToken()->getUser();
+        $menuGenerator = new MenuGenerator($user);
+        
+        $menuGenerator->add('Pulpit', 'panel_dashboard', 'fa fa-dashboard')
+                ->add('Użytkownicy', 'panel_users', 'fa fa-group')
+                ->add('Ustawienia', 'admin_settings', 'fa fa-cogs', 'ROLE_ADMIN');
+        
+        
+        return $this->render('MainBundle:Elements:menu.html.twig', array('menu'=>$menuGenerator->getMenu()));        
     }
    
 }
