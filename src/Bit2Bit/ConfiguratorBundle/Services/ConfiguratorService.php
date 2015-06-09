@@ -2,7 +2,8 @@
 
 namespace Bit2Bit\ConfiguratorBundle\Services;
 
-use Doctrine\ORM\EntityManager;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Description of ManagerService
@@ -10,26 +11,58 @@ use Doctrine\ORM\EntityManager;
  * @author Paweł
  */
 class ConfiguratorService {
+
     //put your code here
-    
+
     protected $em;
+    protected $container;
+    protected $setFile;
     protected $class;
     protected $repository;
     protected $dbal;
     protected $table;
-    
-    public function __construct($entityManager){
+
+    public function __construct($entityManager, $container) {
         $this->em = $entityManager;
+        $this->container = $container;
+
+        $this->setFile = $this->container->getParameter('kernel.cache_dir') . '/b2b/settings';
+        if (!file_exists($this->setFile)) {
+            $fs = new Filesystem();
+            try {
+                $fs->mkdir(dirname($this->setFile));
+                $settings = $this->em->getRepository('ConfiguratorBundle:Setting')->findAll();
+                $settingsCache = '';
+                foreach($settings as $setting){
+                    $settingsCache .= $setting->getKey().'|<=>|'.$setting->getValue().PHP_EOL;
+                }
+                file_put_contents($this->setFile, $settingsCache);
+            } catch (IOException $e) {
+                echo "Error occured while cacheing settings";
+            }
+        }
     }
     
-    public function get($key){
-        $setting = $this->em->getRepository('ConfiguratorBundle:Setting')->findOneByKey($key);
-        if(!$setting){
+    private function getCache(){
+        $settingsCache = file_get_contents($this->setFile);        
+                
+        $settingsLines = explode(PHP_EOL, $settingsCache);
+        $settings = array();
+        foreach($settingsLines as $line){
+            $keyValue = explode('|<=>|',$line);
+            $settings[$keyValue[0]] = (isset($keyValue[1])) ? $keyValue[1] : '';
+        }
+        return $settings;
+    }
+
+    public function get($key) {
+        $settings = $this->getCache();        
+        if (!isset($settings[$key])) {
             return '';
         }
-        return $setting->getValue();
+        return $settings[$key];
     }
-    
+
     public function getEm() {
         return $this->em;
     }
@@ -38,7 +71,7 @@ class ConfiguratorService {
         $this->em = $em;
         return $this;
     }
-    
+
     public function getClass() {
         return $this->class;
     }
@@ -47,7 +80,7 @@ class ConfiguratorService {
         $this->class = $class;
         return $this;
     }
-    
+
     public function getRepository() {
         return $this->repository;
     }
@@ -74,7 +107,5 @@ class ConfiguratorService {
         $this->table = $table;
         return $this;
     }
-
-
 
 }

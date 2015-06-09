@@ -15,12 +15,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Bit2Bit\BaseBundle\BaseBundle(),
             new Bit2Bit\ConfiguratorBundle\ConfiguratorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Bit2Bit\MainBundle\MainBundle(),
             new Bit2Bit\FrontBundle\FrontBundle\FrontBundle(),
+            new Bit2Bit\NewsletterBundle\NewsletterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

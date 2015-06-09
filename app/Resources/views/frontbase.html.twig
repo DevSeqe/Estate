@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
-        <title>Zając Nieruchomości</title>
+        <title>{{ setting.get('base:name') }}</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 phoneNumber">
-                        606 606 606
+                        {{ setting.get('base:phone') }}
                     </div>
                 </div>                
             </div>

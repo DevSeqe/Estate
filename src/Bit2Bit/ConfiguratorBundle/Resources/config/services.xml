@@ -11,6 +11,7 @@
     <services>
         <service id="b2b.configurator" class="Bit2Bit\ConfiguratorBundle\Services\ConfiguratorService">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="service_container"/>
         </service>
         
         <service id="bit2bit.configuratorbundle.setting" class="%bit2bit.configuratorbundle.manager.setting.class%">
