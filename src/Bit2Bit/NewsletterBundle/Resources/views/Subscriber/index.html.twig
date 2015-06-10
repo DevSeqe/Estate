@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <i class="fa fa-group"></i>
+                    <i class="fa fa-at"></i>
                     <h3 class="box-title">Subskrybenci</h3>                    
                     <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Narzędzia">
                         <div class="btn-group" >                            
@@ -69,20 +69,7 @@
                     "url": "http://cdn.datatables.net/plug-ins/1.10.7/i18n/Polish.json"
                 }
             });
-            $('.btn-send-mail').on('click', function () {
-                var url = $(this).data('url');
-                $.ajax({
-                    url: url,
-                    success: function (result) {
-                        if (result.success) {
-                            printAlert('success', result.msg, true);
-                        }
-                        else {
-                            printAlert('danger', result.msg, true);
-                        }
-                    }
-                });
-            });
+            
             $('.btn-remove').on('click', function () {
                 var row = $(this).closest('tr');
                 var user = row.find('td:nth-child(3)').text();

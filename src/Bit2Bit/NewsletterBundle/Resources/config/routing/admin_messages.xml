@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    
+    <route id="admin_message" path="/">
+        <default key="_controller">NewsletterBundle:Message:index</default>    
+    </route>
+    
+    <route id="admin_message_new" path="/new">
+        <default key="_controller">NewsletterBundle:Message:new</default>    
+    </route>
+       
+    <route id="admin_message_edit" pattern="/{id}/edit">
+        <default key="_controller">NewsletterBundle:Message:edit</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_message_duplicate" pattern="/{id}/duplicate">
+        <default key="_controller">NewsletterBundle:Message:duplicate</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_message_send" pattern="/{id}/send">
+        <default key="_controller">NewsletterBundle:Message:send</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="admin_message_remove" pattern="/{id}/remove">
+        <default key="_controller">NewsletterBundle:Message:remove</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>

@@ -5,6 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="@NewsletterBundle/Resources/config/routing/admin_subscribers.xml" prefix="/admin/subscribers" />  
+    <import resource="@NewsletterBundle/Resources/config/routing/admin_messages.xml" prefix="/admin/messages" />  
     
     <route id="subscribe" path="/subscribe">
         <default key="_controller">NewsletterBundle:Subscriber:subscribe</default>    
