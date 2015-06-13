@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Bit2Bit\OfferBundle\Entity\Localization">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>        
+        <field name="city" column="city" type="string"/>
+        <field name="street" column="street" type="string" nullable="true"/>
+        <field name="building" column="building" type="string"/>
+        <field name="latitude" column="latitude" type="string" nullable="true"/>
+        <field name="longitude" column="longitude" type="string" nullable="true"/>
+    </entity>
+</doctrine-mapping>

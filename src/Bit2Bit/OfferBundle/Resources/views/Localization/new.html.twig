@@ -1,0 +1,170 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Lokalizacje
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-map-marker"></i>
+                    <h3 class="box-title">Dodaj lokalizację</h3>
+
+                    <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Wyjdź">
+                        <div class="btn-group" >                            
+                            <a href="{{ path('user_localization') }}" class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box-body">
+                    {{ form_start(form) }} 
+                    <div class="row">
+                        <div class="col-md-7">
+                            {{ form_row(form.city) }}
+                            {{ form_row(form.street) }}
+                            {{ form_row(form.building) }}
+                            {{ form_row(form.building) }}
+                            {{ form_row(form.latitude) }}
+                            {{ form_row(form.longitude) }}
+                        </div>
+                        <div class="col-md-5">
+                            <div id="geolocalizationMap"></div>
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-flat btn-sm btn-primary btn-search"><i class="fa fa-search"></i> Wyszukaj lokalizację</button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-flat btn-sm btn-primary btn-show-geo disabled"><i class="fa fa-globe"></i> Pokaż propozycje (<span class="geosNr">0</span>)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(form) }} 
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="geosModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Geolokalizacja - Propozycje</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Lokalizacja</th>
+                                <th style="width:50px;">Wybierz</th>
+                            </tr>
+                        </thead>
+                        <tbody class="geosTab">
+                            <tr>
+                                <td>Jakiś tam adres, nie ważne</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary btn-select" data-lat="" data-lng=""><i class="fa fa-map-marker"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript">
+        var geocoder;
+        var map;
+        var marker = new google.maps.Marker();
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            var mapCanvas = document.getElementById('geolocalizationMap');
+            var mapOptions = {
+                center: new google.maps.LatLng(51.9189046, 19.1343786),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(mapCanvas, mapOptions);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        $('.btn-search').on('click', function () {
+            var address = $('#create_localization_city').val();
+            if (address != '' && $('#create_localization_street').val() != '') {
+                address += ", ul. " + $('#create_localization_street').val();
+            }
+            else {
+                if ($('#create_localization_street').val() != '') {
+                    address = "ul. " + $('#create_localization_street').val();
+                }
+            }
+            address += " " + $('#create_localization_building').val();
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    $('.btn-show-geo').removeClass('disabled');
+                    $('.geosNr').text(results.length);
+                    map.setCenter(results[0].geometry.location);
+                    map.setZoom(14);
+                    marker.setMap(null);
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    $('#create_localization_latitude').val(results[0].geometry.location.A);
+                    $('#create_localization_longitude').val(results[0].geometry.location.F);
+                    $('.geosTab').html('');
+                    $.each(results, function () {
+                        createRow(this).appendTo('.geosTab');
+                    });
+                } else {
+        {#                    console.log('Geocode was not successful for the following reason: ' + status);#}
+                        $('.btn-show-geo').addClass('disabled');
+                        $('.geosNr').text('0');
+                    }
+                });
+            });
+            $('.btn-show-geo').on('click', function () {
+                if (!$(this).hasClass('disabled')) {
+                    $('#geosModal').modal('show');
+                }
+            });
+            function createRow(data) {
+                var row = $('<tr></tr>');
+                row.append('<td>' + data.formatted_address + '</td>');
+                row.append('<td><button type="button" class="btn btn-sm btn-primary btn-select" data-lat="' + data.geometry.location.A + '" data-lng="' + data.geometry.location.F + '"><i class="fa fa-map-marker"></i></button></td>');
+                return row;
+            }
+            $('.geosTab').on('click', '.btn-select', function () {
+                var lat = $(this).data('lat');
+                var lng = $(this).data('lng');
+                var pos = new google.maps.LatLng(lat, lng);
+                map.setCenter(pos);
+                map.setZoom(14);
+                marker.setMap(null);
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: pos
+                });
+                $('#create_localization_latitude').val(lat);
+                $('#create_localization_longitude').val(lng);
+                $('.modal').modal('hide');
+            });
+    </script>
+{% endblock %}

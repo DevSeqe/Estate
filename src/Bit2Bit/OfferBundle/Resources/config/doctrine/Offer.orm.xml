@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Bit2Bit\OfferBundle\Entity\Offer">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>        
+        <field name="name" column="name" type="string"/>
+        <field name="slug" column="slug" type="string"/>
+        <many-to-one field="localization" target-entity="Bit2Bit\OfferBundle\Entity\Localization"/>
+        <field name="pricePerMeter" column="pricePerMeter" type="decimal"/>
+        <field name="area" column="area" type="decimal"/>
+        <field name="rooms" column="rooms" type="integer"/>
+        <field name="floor" column="floor" type="integer"/>
+        <field name="numberOfFloors" column="numberOfFloors" type="integer"/>
+        <field name="type" column="type" type="string"/>
+        <field name="availableFrom" column="availableFrom" type="date"/>
+        <field name="description" column="description" type="text"/>
+        <field name="details" column="details" type="text"/>
+        <many-to-one field="agent" target-entity="Bit2Bit\MainBundle\Entity\User"/>
+        <field name="hotOffer" column="hotOffer" type="boolean"/>
+        <field name="discount" column="discount" type="decimal"/>
+    </entity>
+</doctrine-mapping>

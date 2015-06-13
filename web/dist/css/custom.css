@@ -20,3 +20,8 @@
     border-bottom: 3px solid #666;
     border-top: 0;
 }
+
+#geolocalizationMap{
+    width:100%;
+    height:350px;
+}

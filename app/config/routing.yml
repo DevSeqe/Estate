@@ -1,3 +1,7 @@
+offer:
+    resource: "@OfferBundle/Resources/config/routing.xml"
+    prefix:   /
+
 newsletter:
     resource: "@NewsletterBundle/Resources/config/routing.xml"
     prefix:   /

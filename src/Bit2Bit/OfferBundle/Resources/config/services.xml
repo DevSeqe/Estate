@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="offer.example" class="Bit2Bit\OfferBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+<parameters><parameter key="bit2bit.offerbundle.manager.localization.class">Bit2Bit\OfferBundle\Manager\LocalizationManager</parameter><parameter key="bit2bit.offerbundle.entity.localization.class">Bit2Bit\OfferBundle\Entity\Localization</parameter><parameter key="bit2bit.offerbundle.manager.offer.class">Bit2Bit\OfferBundle\Manager\OfferManager</parameter><parameter key="bit2bit.offerbundle.entity.offer.class">Bit2Bit\OfferBundle\Entity\Offer</parameter></parameters><services><service id="bit2bit.offerbundle.localization" class="%bit2bit.offerbundle.manager.localization.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.offerbundle.entity.localization.class%</argument></service><service id="bit2bit.offerbundle.offer" class="%bit2bit.offerbundle.manager.offer.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.offerbundle.entity.offer.class%</argument></service></services></container>
