@@ -1,0 +1,39 @@
+<div class="searchBlock mb30 row">
+    <form action="{{ path('offers_search') }}" method="POST">
+        <div class="col-md-10">
+            <div class="row mb15">
+                <input type="text" class="form-control col-md-6 form-control-flat" placeholder="lokalizacja" name="localization"/>
+                <select class="form-control col-md-2 form-control-flat" name="market_type">
+                    <option value="primary">rynek wtórny</option>
+                    <option value="seconadry">rynek pierwotny</option>
+                </select>
+                <select class="form-control col-md-2 form-control-flat" name="object_type">
+                    <option value="flat">mieszkanie</option>
+                    <option value="house">dom</option>
+                    <option value="plot">działka</option>
+                    <option value="locale">lokal</option>
+                </select>
+                <select class="form-control col-md-2 form-control-flat" name="offer_type">
+                    <option value="sell">sprzedaż</option>
+                    <option value="rent">wynajem</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-4 bordered">
+                    cena: <input class="inline-input" name="price_min" type="text"/> do <input class="inline-input" name="price_max" type="text" />zł
+                </div>
+                <div class="col-md-4 bordered">
+                    powierzchnia: <input class="inline-input" name="area_min" type="text"/> do <input class="inline-input" name="area_max" type="text" />
+                </div>
+                <div class="col-md-4 bordered">
+                    liczba pokoi: <input class="inline-input" name="rooms_min" type="text"/> do <input class="inline-input" name="rooms_max" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-blank col-md-12 form-control-flat">
+                wyszukaj >>
+            </button>     
+        </div>
+    </form>
+</div>

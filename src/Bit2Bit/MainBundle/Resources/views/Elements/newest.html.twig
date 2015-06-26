@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">                            
+        <h3>najnowsze oferty:</h3>
+        {% for item in newest %}
+            <div class="newestOffer">
+                <div class="thumb" style="background-image: url('{{ item.getThumbnail }}');">                                        
+                </div>
+                <div class="desc">
+                    <div>
+                        {{ item.localization.city }}<br/>
+                        {{ item.area }}m<sup>2</sup>
+                    </div>
+                    <a href="{{ path('offer_details',{id:item.id}) }}">sprawdź >></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

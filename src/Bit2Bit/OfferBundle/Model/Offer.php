@@ -22,6 +22,13 @@ class Offer extends AbstractEntity{
 	protected $agent;
 	protected $hotOffer;
 	protected $discount;
+	protected $published;
+	protected $rent;
+	protected $video;
+        protected $marketType;
+        protected $created;
+        protected $commition;
+        protected $similar;
 
 
 	public function getId(){
@@ -105,8 +112,14 @@ class Offer extends AbstractEntity{
 		return $this;
 	}
 
-	public function getType(){
+	public function getType($key = true){
+                if($key){
 		return $this->type;
+                }
+                else{
+                    $types = \Bit2Bit\OfferBundle\Enum\Type::getList();
+                    return (isset($types[$this->type])) ? $types[$this->type] : '';
+                }
 	}
 
 	public function setAvailableFrom($availableFrom){
@@ -162,6 +175,69 @@ class Offer extends AbstractEntity{
 	public function getDiscount(){
 		return $this->discount;
 	}
+        
+        function getPublished() {
+            return $this->published;
+        }
+
+        function setPublished($published) {
+            $this->published = $published;
+            return $this;
+        }
+
+        function getRent() {
+            return $this->rent;
+        }
+
+        function setRent($rent) {
+            $this->rent = $rent;
+            return $this;
+        }
+        
+        function getVideo() {
+            return $this->video;
+        }
+
+        function setVideo($video) {
+            $this->video = $video;
+            return $this;
+        }
+        
+        function getMarketType() {
+            return $this->marketType;
+        }
+
+        function setMarketType($marketType) {
+            $this->marketType = $marketType;
+            return $this;
+        }
+        
+        function getCreated() {
+            return $this->created;
+        }
+
+        function setCreated($created) {
+            $this->created = $created;
+            return $this;
+        }
+        
+        function getCommition() {
+            return $this->commition;
+        }
+
+        function setCommition($commition) {
+            $this->commition = $commition;
+            return $this;
+        }
+
+        function getSimilar() {
+            return $this->similar;
+        }
+
+        function setSimilar($similar) {
+            $this->similar = $similar;
+            return $this;
+        }
 
 
 }

@@ -6,18 +6,25 @@
         </id>        
         <field name="name" column="name" type="string"/>
         <field name="slug" column="slug" type="string"/>
-        <many-to-one field="localization" target-entity="Bit2Bit\OfferBundle\Entity\Localization"/>
-        <field name="pricePerMeter" column="pricePerMeter" type="decimal"/>
-        <field name="area" column="area" type="decimal"/>
+        <field name="video" column="video" type="string" nullable="true"/>
+        <many-to-one field="localization" target-entity="Bit2Bit\OfferBundle\Entity\Localization" nullable="true"/>
+        <field name="pricePerMeter" column="pricePerMeter" type="decimal" precision="8" scale="2"/>
+        <field name="area" column="area" type="decimal" precision="8" scale="2"/>
         <field name="rooms" column="rooms" type="integer"/>
         <field name="floor" column="floor" type="integer"/>
         <field name="numberOfFloors" column="numberOfFloors" type="integer"/>
         <field name="type" column="type" type="string"/>
+        <field name="similar" column="similar" type="array" nullable="true"/>
+        <field name="marketType" column="marketType" type="string"/>
         <field name="availableFrom" column="availableFrom" type="date"/>
-        <field name="description" column="description" type="text"/>
-        <field name="details" column="details" type="text"/>
+        <field name="description" column="description" type="text" nullable="true"/>
+        <field name="details" column="details" type="text" nullable="true"/>
         <many-to-one field="agent" target-entity="Bit2Bit\MainBundle\Entity\User"/>
         <field name="hotOffer" column="hotOffer" type="boolean"/>
-        <field name="discount" column="discount" type="decimal"/>
+        <field name="published" column="published" type="boolean"/>
+        <field name="rent" column="rent" type="boolean"/>
+        <field name="discount" column="discount" type="decimal" nullable="true"/>
+        <field name="created" column="created" type="date" nullable="true"/>
+        <field name="commition" column="commition" type="boolean" nullable="true"/>
     </entity>
 </doctrine-mapping>

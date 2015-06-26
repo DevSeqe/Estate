@@ -1,0 +1,279 @@
+{% extends "::frontbase.html.twig" %}
+
+{% block content %}
+    <div class="grayLineBottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Znajdź nieruchomość</h1>
+                    {{ render(controller('MainBundle:Elements:search')) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grayLineBottom">
+        <div class="container m30">
+            <div class="row">
+                <div class="col-md-10 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div role="tabpanel">
+
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab">zdjęcia</a></li>
+                                    {% if offer.video is not null %}<li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">wideo</a></li>{% endif %}
+                                    <li role="presentation"><a href="#map" aria-controls="messages" role="tab" data-toggle="tab">mapa</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="photos">
+                                        {% if offer.hasPhotos %}
+                                            <div class="row m30">
+                                                <div class="col-md-12">                                    
+                                                    <ul class="bxslider">
+                                                        {% for photo in offer.getPhotos %}
+                                                            <li>
+                                                                <img src="{{ photo }}" />
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <div id="bx-pager">
+                                                        {% if offer.getPhotos|length > 6 %}
+                                                            <a class="buttons prev" href="#"><i class="fa fa-chevron-circle-left"></i></a>
+                                                            <div class="viewport">
+                                                                <div class="overview" id="bx-pager">
+                                                                    {% for key, photo in offer.getPhotos %}                                                
+                                                                        {#                                                        <li>#}
+                                                                        <a data-slide-index="{{ key }}" href="">
+                                                                            <img src="{{ photo }}" />
+                                                                        </a>
+                                                                        {#                                                        </li>#}
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                            <a class="buttons next" href="#"><i class="fa fa-chevron-circle-right"></i></a>
+                                                            {% else %}
+                                                                {% for key, photo in offer.getPhotos %}                               
+                                                                <a data-slide-index="{{ key }}" href="">
+                                                                    <img src="{{ photo }}" />
+                                                                </a>
+                                                            {% endfor %}
+                                                        {% endif %}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="row m30">     
+                                                <div class="col-md-12">
+                                                    <img src="{{ offer.getThumbnail }}" alt="{{ offer.name }}" class="img-responsive img-center"/>
+                                                </div>                                    
+                                            </div>
+                                            <div class="alert alert-info m30">
+                                                <i class="fa fa-info-circle"></i> Ta oferta nie ma dodanych żadnych zdjęć.
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    {% if offer.video is not null %}
+                                        <div role="tabpanel" class="tab-pane" id="video">
+                                            <div class="row m30">                                    
+                                                <div class="col-md-6 col-md-offset-3">                                    
+                                                    <iframe style="width:100%;" height="315" src="https://www.youtube.com/embed/{{ offer.videoCode }}" frameborder="0" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div role="tabpanel" class="tab-pane" id="map">
+                                        {% if offer.localization is not null %}
+                                            <div class="row m30">
+                                                <div class="col-md-12">
+                                                    <div id="localizationMap" style="width:100%; height:380px;"></div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="m30">                                    
+                                                <div class="alert alert-info">
+                                                    <i class="fa fa-info-circle"></i> <strong>Uwaga!</strong> Nie można opublikować oferty dopóki nie zostanie do niego przypisana lokalizacja.
+                                                    Możesz dodać nową lokalizację, lub edytować ofertę i dodać istniejącą.<br/>
+                                                    <div class="row m30">
+                                                        <div class="col-md-6 col-md-offset-3">
+                                                            <div class="btn-group btn-group-justified">
+                                                                <a class="btn btn-sm btn-flat btn-success" href="{{ path('user_localization_new') }}"><i class="fa fa-map-marker"></i> Dodaj nową lokalizację</a>
+                                                                <a class="btn btn-sm btn-flat btn-primary" href="{{ path('user_offer_edit',{id:offer.id}) }}"><i class="fa fa-home"></i> Edytuj ofertę</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m30">
+                        <div class="col-md-6">
+                            <h3>Dane podstawowe</h3>
+                            <table class="table no-border table-condensed table-striped">
+                                <tr>
+                                    <td class="bold">Cena za m<sup>2</sup>:</td>
+                                    <td class="text-right">{{ offer.pricePerMeter }} zł</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Powierzchnia całkowita:</td>
+                                    <td class="text-right">{{ offer.area }}m<sup>2</sup></td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Liczba pokoi:</td>
+                                    <td class="text-right">{{ offer.rooms }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Piętro:</td>
+                                    <td class="text-right">{{ offer.floor }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Liczba pięter:</td>
+                                    <td class="text-right">{{ offer.numberOfFloors }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Numer oferty:</td>
+                                    <td class="text-right">{{ offer.name }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Ogólne warunki</h3>
+                            <table class="table no-border table-condensed table-striped">
+                                <tr>
+                                    <td class="bold">Rynek:</td>
+                                    <td class="text-right">{% if offer.marketType == 'primary' %}Pierwotny{% else %}Wtórny{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Cena:</td>
+                                    <td class="text-right">{{ offer.price }} zł</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Dostępne od:</td>
+                                    <td class="text-right">{{ offer.availableFrom|date('Y-m-d') }}</td>
+                                </tr>                    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 hidden-sm">
+                    {% if offer.similar|length > 0 %}
+                        <div class="row">
+                            <div class="col-md-12">                            
+                                <h3>podobne oferty:</h3>
+                                {% for item in offer.similar %}
+                                    <div class="newestOffer">
+                                        <div class="thumb" style="background-image: url('{{ item.thumb }}');">                                        
+                                        </div>
+                                        <div class="desc">
+                                            <div>
+                                                {{ item.city }}<br/>
+                                                {{ item.area }}m<sup>2</sup>
+                                            </div>
+                                            <a href="{{ path('offer_details',{id:item.id}) }}">sprawdź >></a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {{ render(controller('MainBundle:Elements:newest')) }}
+                </div>
+            </div>
+            <div class="container m30">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">opis</a></li>                        
+                                <li role="presentation"><a href="#details" role="tab" data-toggle="tab">szczegóły</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="description">
+                                    <div class="row m30">
+                                        <div class="col-md-12">  
+                                            {{ offer.description|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="details">
+                                    <div class="row m30">
+                                        <div class="col-md-12">  
+                                            {{ offer.details|raw }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb30">
+                    <div class="col-md-offset-8 col-md-4">
+                        <button class="btn btn-block btn-flat btn-default">
+                            skontaktuj się z agentem >
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="/plugins/jbxs/plugins/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="/plugins/jbxs/plugins/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/plugins/jbxs/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="/plugins/tinycarousel/jquery.tinycarousel.js"></script>
+    <script type="text/javascript">
+        $('.bxslider').bxSlider({
+            pagerCustom: '#bx-pager'
+        });
+        $(function () {
+            $('#bx-pager').tinycarousel();
+        });
+    </script>
+    {% if offer.localization is not null %}
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script type="text/javascript">
+        var map;
+        var marker = new google.maps.Marker();
+        function initialize() {
+            var mapCanvas = document.getElementById('localizationMap');
+                    var lat = {{ offer.localization.latitude }};
+                    var lng = {{ offer.localization.longitude }};
+                    var pos = new google.maps.LatLng(lat, lng);
+            var mapOptions = {
+                center: pos,
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(mapCanvas, mapOptions);
+            marker = new google.maps.Marker({
+                map: map,
+                position: pos
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+        $('a[href=#map]').on('click', function () {
+            setTimeout(function () {
+                google.maps.event.trigger(map, 'resize');
+                map.setCenter(marker.getPosition());
+            }, 50);
+        });
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block css %}
+    <link href="/plugins/jbxs/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/tinycarousel/tinycarousel.css" rel="stylesheet" type="text/css" />
+{% endblock %}

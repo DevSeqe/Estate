@@ -8,7 +8,8 @@ class DashboardController extends Controller
 {
     public function indexAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();        
+        $user = $this->get('security.context')->getToken()->getUser();  
+        
         return $this->render('MainBundle:Dashboard:index.html.twig');
     }
         

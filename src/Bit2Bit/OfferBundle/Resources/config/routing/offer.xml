@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    
+    <route id="user_offer" path="/">
+        <default key="_controller">OfferBundle:Offer:index</default>    
+    </route>
+    
+    <route id="user_offer_new" path="/new">
+        <default key="_controller">OfferBundle:Offer:new</default>    
+    </route>
+       
+    <route id="user_offer_edit" pattern="/{id}/edit">
+        <default key="_controller">OfferBundle:Offer:edit</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="user_offer_show" pattern="/{id}/show">
+        <default key="_controller">OfferBundle:Offer:show</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="user_offer_toggle" pattern="/{id}/toggle/{type}">
+        <default key="_controller">OfferBundle:Offer:toggle</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="user_offer_remove" pattern="/{id}/remove">
+        <default key="_controller">OfferBundle:Offer:remove</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>

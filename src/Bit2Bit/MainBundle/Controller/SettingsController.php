@@ -31,7 +31,9 @@ class SettingsController extends Controller {
             else{
                 $setting->setValue($data['set_value']);
                 $settingManager->update($setting);
-                $session->getFlashBag()->add('success','Pomyślnie zmieniono ustawienie.');                                        
+                $session->getFlashBag()->add('success','Pomyślnie zmieniono ustawienie.');        
+                $cacheFile = $this->getParameter('kernel.cache_dir') . '/b2b/settings';
+                unlink($cacheFile);
             }
         }
         else{

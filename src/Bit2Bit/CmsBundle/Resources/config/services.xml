@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="cms.example" class="Bit2Bit\CmsBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+<parameters><parameter key="bit2bit.cmsbundle.manager.partner.class">Bit2Bit\CmsBundle\Manager\PartnerManager</parameter><parameter key="bit2bit.cmsbundle.entity.partner.class">Bit2Bit\CmsBundle\Entity\Partner</parameter></parameters><services><service id="bit2bit.cmsbundle.partner" class="%bit2bit.cmsbundle.manager.partner.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.cmsbundle.entity.partner.class%</argument></service></services></container>

@@ -1,0 +1,75 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Partnerzy
+{% endblock %}
+
+{% block content %}    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <i class="fa fa-suitcase"></i>
+                    <h3 class="box-title">Edytuj partnera</h3>
+
+                    <div class="box-tools pull-right" data-toggle="tooltip" title="" data-original-title="Wyjdź">
+                        <div class="btn-group" >                            
+                            <a href="{{ path('partner') }}" class="btn btn-default btn-sm"><i class="fa fa-close"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box-body">
+                    {{ form_start(form) }} 
+                    <div class="row">
+                        <div class="col-md-7">
+                            {{ form_row(form.name) }}
+                            {{ form_row(form.url) }}
+                            {{ form_row(form.image) }}                            
+                        </div>
+                        <div class="col-md-5">
+                            <div class="image">
+                                <img src="{{ partner.image }}" alt="{{ partner.name }}" class="img-responsive" />
+                            </div>                            
+                            <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+                            <hr />
+                            {{ form_row(form.submit) }}
+
+                        </div>
+                    </div>
+                    {{ form_end(form) }} 
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>    
+    
+{% endblock %}
+
+{% block css %}
+    
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        function encodeImageFileAsURL(cb) {
+            return function () {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    cb(reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        $('#inputFileToLoad').change(encodeImageFileAsURL(function (base64Img) {
+            
+            $('#partner_image').val(base64Img);
+            var img = $('<img src="'+base64Img+'" class="img-responsive" />');
+            $('.image').html('').append(img);                    
+        }));
+    </script>
+{% endblock %}

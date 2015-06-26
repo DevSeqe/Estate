@@ -7,4 +7,48 @@
     <route id="front_homepage" path="/">
         <default key="_controller">FrontBundle:Site:index</default>
     </route>
+    
+    <route id="offers" path="/oferty">
+        <default key="_controller">FrontBundle:Site:offers</default>
+    </route>
+    
+    <route id="offers_flats" path="/oferty/mieszkania">
+        <default key="_controller">FrontBundle:SiteOffer:offersFlats</default>
+    </route>
+    
+    <route id="offers_houses" path="/oferty/domy">
+        <default key="_controller">FrontBundle:SiteOffer:offersHouses</default>
+    </route>
+
+    <route id="offers_plots" path="/oferty/dzialki">
+        <default key="_controller">FrontBundle:SiteOffer:offersPlots</default>
+    </route>
+    
+    <route id="offers_locales" path="/oferty/lokale">
+        <default key="_controller">FrontBundle:SiteOffer:offersLocales</default>
+    </route>
+    
+    <route id="offers_rent" path="/oferty/wynajem">
+        <default key="_controller">FrontBundle:SiteOffer:offersForRent</default>
+    </route>
+    
+    <route id="offers_sell" path="/oferty/sprzedaz">
+        <default key="_controller">FrontBundle:SiteOffer:offersForSale</default>
+    </route>
+    
+    <route id="offers_special" path="/oferty/oferty-specjalne">
+        <default key="_controller">FrontBundle:SiteOffer:offersSpecial</default>
+    </route>
+    
+    <route id="offer_details" path="/{id}/oferta">
+        <default key="_controller">FrontBundle:Site:offer</default>
+    </route>
+    
+    <route id="advice_page" path="/doradztwo">
+        <default key="_controller">FrontBundle:Site:advicePage</default>
+    </route>
+    
+    <route id="offers_search" path="/oferta/wyniki-wyszukiwania">
+        <default key="_controller">FrontBundle:Site:search</default>
+    </route>
 </routes>

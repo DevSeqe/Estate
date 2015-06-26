@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <!-- Partners CRUD  -->
+    <route id="partner" path="/partner/">
+        <default key="_controller">CmsBundle:Partner:index</default>    
+    </route>
+    
+    <route id="partner_new" path="/partner/new">
+        <default key="_controller">CmsBundle:Partner:new</default>    
+    </route>
+       
+    <route id="partner_edit" pattern="/partner/{id}/edit">
+        <default key="_controller">CmsBundle:Partner:edit</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="partner_remove" pattern="/partner/{id}/remove">
+        <default key="_controller">CmsBundle:Partner:remove</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+</routes>

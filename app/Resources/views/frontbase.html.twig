@@ -13,13 +13,15 @@
         <link href="/css/front-styles.css" rel="stylesheet">
         <link href="/dist/css/custom.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        {% block css %}
+        {% endblock %}
     </head>
     <body>        
         <div class="headerCont">
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <a href="/">
+                        <a href="{{ path('front_homepage') }}" class="header-logo">
                             <img src="/images/logo.png" class="img-responsive" alt="Zając Nieruchomości" />
                         </a>
                     </div>
@@ -28,10 +30,10 @@
                             Tu będzie like box
                         </div>
                         <div>
-                            <a href="#" class="social-btn"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="social-btn"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="social-btn"><i class="fa fa-youtube"></i></a>
+                            <a href="{{ setting.get('social:facebook') }}" class="social-btn"><i class="fa fa-facebook"></i></a>
+                            <a href="{{ setting.get('social:twitter') }}" class="social-btn"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ setting.get('social:gplus') }}" class="social-btn"><i class="fa fa-google-plus"></i></a>
+                            <a href="{{ setting.get('social:youtube') }}" class="social-btn"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                     <div class="col-md-3 phoneNumber">
@@ -43,9 +45,9 @@
         <div class="menuCont">
             <div class="container">
                 <div class="row text-right">
-                    <a class="col-md-offset-6 col-md-2" href="/nieruchomosci">Nieruchomości</a>
-                    <a class="col-md-2" href="/o-nas">O nas</a>
-                    <a class="col-md-2" href="/kontakt">Kontakt</a>
+                    <a class="col-md-offset-6 col-xs-offset-0 col-md-2 col-xs-12" href="{{ path('offers') }}">Nieruchomości</a>
+                    <a class="col-md-2 col-xs-12" href="/o-nas">O nas</a>
+                    <a class="col-md-2 col-xs-12" href="/kontakt">Kontakt</a>
                 </div>
             </div>
         </div>
@@ -78,11 +80,11 @@
                     <div class="col-md-4">
                         <h4><span>Menu</span></h4>
                         <ul class="footer-menu">
-                            <li><a href="#">nieruchomości</a></li>
-                            <li><a href="#">mieszkania</a></li>
-                            <li><a href="#">domy</a></li>
-                            <li><a href="#">działki</a></li>
-                            <li><a href="#">lokale</a></li>
+                            <li><a href="{{ path('offers') }}">nieruchomości</a></li>
+                            <li><a href="{{ path('offers_flats') }}">mieszkania</a></li>
+                            <li><a href="{{ path('offers_houses') }}">domy</a></li>
+                            <li><a href="{{ path('offers_plots') }}">działki</a></li>
+                            <li><a href="{{ path('offers_locales') }}">lokale</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
@@ -98,10 +100,10 @@
                     <div class="col-md-4">
                         <h4><span>Znajdź nas</span></h4>
                         <div class="socialBlock">
-                            <a href="#" class="social-btn foot"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="social-btn foot"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="social-btn foot"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="social-btn foot"><i class="fa fa-youtube"></i></a>
+                            <a href="{{ setting.get('social:facebook') }}" class="social-btn foot"><i class="fa fa-facebook"></i></a>
+                            <a href="{{ setting.get('social:twitter') }}" class="social-btn foot"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ setting.get('social:gplus') }}" class="social-btn foot"><i class="fa fa-google-plus"></i></a>
+                            <a href="{{ setting.get('social:youtube') }}" class="social-btn foot"><i class="fa fa-youtube"></i></a>
                         </div>
                         <div class="copyright">Copyright &copy; native</div>
                     </div>
@@ -129,5 +131,7 @@
                     });
                 });
         </script>
+        {% block js %}
+        {% endblock %}
     </body>
 </html>

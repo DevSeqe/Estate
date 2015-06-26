@@ -18,5 +18,10 @@ class User extends Base{
             }
             return false;
         }
+        
+        public function __toString() {
+            parent::__toString();
+            return ($this->getName() != '' && $this->getSurname() != '') ? $this->getName().' '.$this->getSurname() : $this->getUsername();
+        }
 
 }

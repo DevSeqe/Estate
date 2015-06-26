@@ -5,5 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <import resource="@OfferBundle/Resources/config/routing/localization.xml" prefix="/panel/localization" />  
+    <import resource="@OfferBundle/Resources/config/routing/offer.xml" prefix="/panel/offer" />  
+    <import resource="@OfferBundle/Resources/config/routing/gallery.xml" prefix="/panel/gallery" />  
     
 </routes>

@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Bit2Bit\FrontBundle\FrontBundle\FrontBundle(),
             new Bit2Bit\NewsletterBundle\NewsletterBundle(),
             new Bit2Bit\OfferBundle\OfferBundle(),
+            new Bit2Bit\CmsBundle\CmsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

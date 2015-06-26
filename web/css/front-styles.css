@@ -26,7 +26,8 @@
 
 .menuCont{
     margin: 20px 0px;
-    background: #707070;
+    /*background: #707070;*/
+    background: #000;
     padding: 15px 0px;
 }
 
@@ -133,4 +134,15 @@
     margin-top:45px;
     color: white;
     padding-left:10px;
+}
+
+.btn-flat{
+    border-radius: 0;
+}
+
+
+.searchBlock::after{
+    content: "";
+    display:block;
+    clear:both;
 }

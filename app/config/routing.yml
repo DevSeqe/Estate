@@ -1,3 +1,7 @@
+cms:
+    resource: "@CmsBundle/Resources/config/routing.xml"
+    prefix:   /
+
 offer:
     resource: "@OfferBundle/Resources/config/routing.xml"
     prefix:   /

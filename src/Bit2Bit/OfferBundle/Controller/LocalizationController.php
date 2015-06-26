@@ -3,15 +3,9 @@
 namespace Bit2Bit\OfferBundle\Controller;
 
 use Bit2Bit\MainBundle\Base\AbstractController;
-use Bit2Bit\NewsletterBundle\Entity\Message;
-use Bit2Bit\NewsletterBundle\Entity\Subscriber;
-use Bit2Bit\NewsletterBundle\Form\MessageType;
-use Bit2Bit\NewsletterBundle\Manager\MessageManager;
-use Bit2Bit\NewsletterBundle\Manager\SubscriberManager;
 use Bit2Bit\OfferBundle\Entity\Localization;
 use Bit2Bit\OfferBundle\Form\LocalizationType;
 use Bit2Bit\OfferBundle\Manager\LocalizationManager;
-use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 
 class LocalizationController extends AbstractController {
