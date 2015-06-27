@@ -40,8 +40,8 @@ class Offer extends Base {
     }
 
     public function hasPhotos(){
-        $this->getPhotos();
-        return (!empty($this->photos));
+        $photos = $this->getPhotos();
+        return !empty($photos);
     }
     
     public function getThumbnail() {
