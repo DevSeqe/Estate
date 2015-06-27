@@ -41,11 +41,12 @@ class Offer extends Base {
 
     public function hasPhotos(){
         $photos = $this->getPhotos();
-        return !empty($photos);
+        $has = !empty($photos);
+        return $has;
     }
     
     public function getThumbnail() {
-        if(!empty($this->getPhotos())){
+        if(!$this->hasPhotos()){
             return $this->photos[0];
         }    
         return '/images/nophoto.jpg';
