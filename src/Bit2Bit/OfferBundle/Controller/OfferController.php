@@ -97,7 +97,10 @@ class OfferController extends AbstractController {
                 ->setSlug($slug)
                 ->setType(Type::FLAT)
                 ->setMarketType(MarketType::SECONDARY)
-                ->setCreated($now);
+                ->setCreated($now)
+                ->setWater('yes')
+                ->setGas('yes')
+                ->setSewerage('yes');
 
         $offerManager->persist($offer)
                 ->flush();

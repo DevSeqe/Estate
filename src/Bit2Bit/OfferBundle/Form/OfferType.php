@@ -97,6 +97,33 @@ class OfferType extends AbstractType {
                 ->add('discount', null, array(
                     'label' => 'Zniżka'
                 ))
+                ->add('water', 'choice', array(
+                    'label' => 'Woda?',
+                    'choices' => array(
+                        'yes' => 'Tak',
+                        'no' => 'Nie',
+                        'process' => 'W drodze'
+                    ),
+                    'multiple' => false
+                ))
+                ->add('gas', 'choice', array(
+                    'label' => 'Gaz?',
+                    'choices' => array(
+                        'yes' => 'Tak',
+                        'no' => 'Nie',
+                        'process' => 'W drodze'
+                    ),
+                    'multiple' => false
+                ))
+                ->add('sewerage', 'choice', array(
+                    'label' => 'Kanalizacja?',
+                    'choices' => array(
+                        'yes' => 'Tak',
+                        'no' => 'Nie',
+                        'process' => 'W drodze'
+                    ),
+                    'multiple' => false
+                ))
                 ->add('submit', 'submit', array(
                     'label' => 'Zapisz'
                 ))

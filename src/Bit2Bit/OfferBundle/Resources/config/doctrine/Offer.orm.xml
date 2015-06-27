@@ -26,5 +26,8 @@
         <field name="discount" column="discount" type="decimal" nullable="true"/>
         <field name="created" column="created" type="date" nullable="true"/>
         <field name="commition" column="commition" type="boolean" nullable="true"/>
+        <field name="water" column="water" type="string"/>
+        <field name="gas" column="gas" type="string"/>
+        <field name="sewerage" column="sewerage" type="string"/>
     </entity>
 </doctrine-mapping>

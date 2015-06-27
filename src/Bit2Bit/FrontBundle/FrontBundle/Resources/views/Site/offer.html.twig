@@ -160,6 +160,21 @@
                                     <td class="text-right">{{ offer.availableFrom|date('Y-m-d') }}</td>
                                 </tr>                    
                             </table>
+                            <h3>Media</h3>
+                            <table class="table no-border table-condensed table-striped">
+                                <tr>
+                                    <td class="bold">Woda:</td>
+                                    <td class="text-right">{% if offer.water == 'yes' %}Tak{% elseif offer.water == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Gaz:</td>
+                                    <td class="text-right">{% if offer.gas == 'yes' %}Tak{% elseif offer.gas == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <td class="bold">Kanalizacja:</td>
+                                    <td class="text-right">{% if offer.sewerage == 'yes' %}Tak{% elseif offer.sewerage == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                                </tr>                    
+                            </table>
                         </div>
                     </div>
                 </div>
