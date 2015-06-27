@@ -14,12 +14,12 @@
     <div class="grayLineBottom">
         <div class="container m30 mb30">
             <div class="row">
-                <div class="col-md-4 col-sm-6 mainPageBox sell" onclick="window.location = '{{ path('offers_sell') }}';">sprzedaj <span>>></span></div>
-                <div class="col-md-4 col-sm-6 mainPageBox rent" onclick="window.location = '{{ path('offers_rent') }}';">wynajmij <span>>></span></div>
+                <div class="col-md-4 col-sm-6 mainPageBox sell" onclick="window.location = '{{ path('offers_sell') }}';">sprzedaż <span>>></span></div>
+                <div class="col-md-4 col-sm-6 mainPageBox rent" onclick="window.location = '{{ path('offers_rent') }}';">wynajem <span>>></span></div>
                 <div class="col-md-4 col-sm-6 mainPageBox advice" onclick="window.location = '{{ path('advice_page') }}';">jak pracujemy <span>>></span></div>
-                <div class="col-md-4 col-sm-6 mainPageBox your_offer">zgłoś ofertę <span>>></span></div>
+                <div class="col-md-4 col-sm-6 mainPageBox your_offer" onclick="window.location = '{{ path('contact',{type:'report'}) }}';">zgłoś ofertę <span>>></span></div>
                 <div class="col-md-4 col-sm-6 mainPageBox special" onclick="window.location = '{{ path('offers_special') }}';">oferty specjalne <span>>></span></div>
-                <div class="col-md-4 col-sm-6 mainPageBox credits">kredyty <span>>></span></div>
+                <div class="col-md-4 col-sm-6 mainPageBox credits" onclick="window.location = '{{ path('credits') }}';">kredyty <span>>></span></div>
             </div>
         </div>
     </div>

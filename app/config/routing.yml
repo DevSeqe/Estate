@@ -1,3 +1,7 @@
+contact:
+    resource: "@ContactBundle/Resources/config/routing.xml"
+    prefix:   /
+
 cms:
     resource: "@CmsBundle/Resources/config/routing.xml"
     prefix:   /

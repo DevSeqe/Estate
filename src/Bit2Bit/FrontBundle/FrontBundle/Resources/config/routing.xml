@@ -12,6 +12,19 @@
         <default key="_controller">FrontBundle:Site:offers</default>
     </route>
     
+    <route id="credits" path="/kredyty">
+        <default key="_controller">FrontBundle:Site:credits</default>
+    </route>
+    
+    <route id="contact" path="/kontakt/{type}">
+        <default key="_controller">FrontBundle:Site:contact</default>
+        <default key="type">other</default>
+    </route>
+    
+    <route id="contact_agent" path="/agent/{id}/kontakt">
+        <default key="_controller">FrontBundle:Site:contactAgent</default>
+    </route>
+    
     <route id="offers_flats" path="/oferty/mieszkania">
         <default key="_controller">FrontBundle:SiteOffer:offersFlats</default>
     </route>

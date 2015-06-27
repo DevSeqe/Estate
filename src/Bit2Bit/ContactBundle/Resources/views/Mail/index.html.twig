@@ -1,0 +1,80 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Wiadomości
+{% endblock %}
+
+{% block content %}    
+    <div class="row">            
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Skrzynka odbiorcza</h3>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                {% if mails|length > 0 %}
+                    <div class="box-body no-padding">
+                        <div class="mailbox-controls">                        
+                            <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                            <div class="pull-right">
+                                1-50/200
+                                <div class="btn-group">
+                                    <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                    <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                </div><!-- /.btn-group -->
+                            </div><!-- /.pull-right -->
+                        </div>
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>      
+                                    {% for mail in mails %}
+                                    <tr>                                    
+                                        <td></td>
+                                        <td class="mailbox-star">{% if mail.readed %}{% else %}<i class="fa fa-envelope text-green"></i>{% endif %}</td>
+                                        <td class="mailbox-name">{{ mail.name }}</td>
+                                        <td class="mailbox-subject {% if mail.readed %}{% else %}bold{% endif %}"><a href="{{ path('user_mail_read', {id:mail.id}) }}">{{ mail.title }}</a></td>
+                                        <td class="mailbox-attachment">{{ mail.label|raw }}</td>
+                                        <td class="mailbox-date">{{ mail.created|date('Y-m-d') }}</td>
+                                    </tr>   
+                                    {% endfor %}
+                                </tbody>
+                            </table><!-- /.table -->
+                        </div><!-- /.mail-box-messages -->
+                    </div><!-- /.box-body -->
+                {% else %}
+                    <div class="box-body">
+                        <div class="alert alert-info">
+                            <i class="fa fa-envelope"></i> Brak wiaodmości do wyświetlenia.
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="box-footer no-padding">
+                    <div class="mailbox-controls">
+                        <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                        <div class="pull-right">
+                            1-50/200
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            </div><!-- /.btn-group -->
+                        </div><!-- /.pull-right -->
+                    </div>
+                </div>
+            </div><!-- /. box -->
+        </div><!-- /.col -->
+    </div>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "::frontbase.html.twig" %}
+
+{% block content %}
+    <div class="grayLineBottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><span class="circle"><i class="fa fa-envelope-o"></i></span> kontakt</h1>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container m30 mb30">
+        <div class="row">
+            <div class="col-md-7">
+                {{ form_start(form) }}                
+                <div class="contactForm">
+                    {{ form_row(form.name) }}                
+                    {{ form_row(form.phone) }}                
+                    {{ form_row(form.email) }}                
+                    {{ form_row(form.category) }}                
+                    {{ form_row(form.content) }}   
+                    <div class="triangle"></div>
+                </div>
+                <div class="text-center">
+                    {{ form_widget(form.submit) }}
+                </div>
+                {{ form_end(form) }}                
+            </div>
+            <div class="col-md-5">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block css %}
+{% endblock %}

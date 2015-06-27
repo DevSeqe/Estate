@@ -3,7 +3,7 @@
     {% for item in menu %}
     <li>
         <a href="{{  path(item.route) }}">
-            <i class="{{ item.icon }}"></i> <span>{{ item.name }}</span>            
+            <i class="{{ item.icon }}"></i> <span>{{ item.name }}</span>{% if item.badge %}<small class="label pull-right bg-green">{{ item.badge }}</small>{% endif %}
         </a>
     </li>    
     {% endfor %}

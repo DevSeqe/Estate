@@ -11,19 +11,21 @@ class MenuGenerator {
         $this->roles = $user->getRoles();
     }
 
-    public function add($name, $route, $icon = '', $required_role = false) {
+    public function add($name, $route, $icon = '', $required_role = false, $badge = false) {
         if (!$required_role) {
             $this->menu[] = array(
                 'route' => $route,
                 'name' => $name,
-                'icon' => $icon
+                'icon' => $icon,
+                'badge' => $badge
             );
         } else {
             if (in_array($required_role, $this->roles)) {
                 $this->menu[] = array(
                     'route' => $route,
                     'name' => $name,
-                    'icon' => $icon
+                    'icon' => $icon,
+                    'badge' => $badge
                 );
             }
         }

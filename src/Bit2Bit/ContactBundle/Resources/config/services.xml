@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <services>
+        <service id="contact.example" class="Bit2Bit\ContactBundle\Example">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+<parameters><parameter key="bit2bit.contactbundle.manager.mail.class">Bit2Bit\ContactBundle\Manager\MailManager</parameter><parameter key="bit2bit.contactbundle.entity.mail.class">Bit2Bit\ContactBundle\Entity\Mail</parameter></parameters><services><service id="bit2bit.contactbundle.mail" class="%bit2bit.contactbundle.manager.mail.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.contactbundle.entity.mail.class%</argument></service></services></container>

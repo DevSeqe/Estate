@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <h4><span>Menu</span></h4>
+                        <h4><span>Kategorie</span></h4>
                         <ul class="footer-menu">
                             <li><a href="{{ path('offers') }}">nieruchomości</a></li>
                             <li><a href="{{ path('offers_flats') }}">mieszkania</a></li>
@@ -90,11 +90,11 @@
                     <div class="col-md-4">
                         <h4><span>Menu</span></h4>
                         <ul class="footer-menu">
-                            <li><a href="#">zarząd</a></li>
-                            <li><a href="#">kariera</a></li>
-                            <li><a href="#">franczyza</a></li>
-                            <li><a href="#">kredyty</a></li>
-                            <li><a href="#">jak sprzedajemy</a></li>
+                            <li><a href="{{ path('contact',{type:'report'}) }}">zgłoś nieruchomość &raquo;</a></li>
+                            <li><a href="{{ path('contact',{type:'sell'}) }}">zgłoś sprzedaż &raquo;</a></li>
+                            <li><a href="{{ path('contact',{type:'search'}) }}">zgłoś poszukiwanie &raquo;</a></li>                            
+                            <li><a href="{{ path('credits') }}">kredyty &raquo;</a></li>
+                            <li><a href="{{ path('advice_page') }}">jak sprzedajemy &raquo;</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
