@@ -4,7 +4,10 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": {
+            "": "src/",
+            "SymfonyStandard": "app/"
+        }
     },
     "require": {
         "php": ">=5.3.3",
@@ -19,8 +22,9 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-		"bit2bit/basebundle": "dev-master",
-		"friendsofsymfony/user-bundle": "dev-master"
+        "bit2bit/basebundle": "dev-master",
+        "friendsofsymfony/user-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -60,14 +64,14 @@
             "dev-master": "2.6-dev"
         }
     },
-	"repositories" : [
-		{
-			"type" : "vcs",
-			"url" : "https://github.com/DevSeqe/EntityGenerator.git"
-		},
-		{
-			"type" : "vcs",
-			"url" : "https://github.com/FriendsOfSymfony/FOSUserBundle.git"
-		}
-	]
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/DevSeqe/EntityGenerator.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git"
+        }
+    ]
 }
