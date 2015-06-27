@@ -1,0 +1,100 @@
+{% extends "::pdf.html.twig" %}
+
+{% block title %}Oferta {{ offer.name }}{% endblock %}
+
+{% block pdf %}
+
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <img src="{{ offer.getThumbnail }}" class="img-responsive"/>            
+        </div><!-- /.col -->
+        <div class="col-xs-8">
+            <h2 class="text-right">{{ offer.name }}</h2>
+            <hr/>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 table-responsive">
+            <h3>Dane podstawowe</h3>
+            <table class="table table-condensed table-striped" style="width:100%;">
+                <tr>
+                    <td class="bold">Cena za m<sup>2</sup>:</td>
+                    <td class="text-right">{{ offer.pricePerMeter }} zł</td>
+                </tr>
+                <tr>
+                    <td class="bold">Powierzchnia całkowita:</td>
+                    <td class="text-right">{{ offer.area }}m<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td class="bold">Liczba pokoi:</td>
+                    <td class="text-right">{{ offer.rooms }}</td>
+                </tr>
+                <tr>
+                    <td class="bold">Piętro:</td>
+                    <td class="text-right">{{ offer.floor }}</td>
+                </tr>
+                <tr>
+                    <td class="bold">Liczba pięter:</td>
+                    <td class="text-right">{{ offer.numberOfFloors }}</td>
+                </tr>                        
+            </table>
+        </div><!-- /.col -->
+        <div class="col-xs-6 table-responsive">
+            <h3>Media</h3>
+            <table class="table table-condensed table-striped" style="width:100%;">
+                <tr>
+                    <td class="bold">Woda:</td>
+                    <td class="text-right">{% if offer.water == 'yes' %}Tak{% elseif offer.water == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                </tr>
+                <tr>
+                    <td class="bold">Gaz:</td>
+                    <td class="text-right">{% if offer.gas == 'yes' %}Tak{% elseif offer.gas == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                </tr>
+                <tr>
+                    <td class="bold">Kanalizacja:</td>
+                    <td class="text-right">{% if offer.sewerage == 'yes' %}Tak{% elseif offer.sewerage == 'no' %}Nie{% else %}W drodze{% endif %}</td>
+                </tr>                    
+            </table>
+
+
+        </div><!-- /.col -->
+        <div class="col-xs-12 table-responsive">
+            <h3>Ogólne warunki</h3>
+            <table class="table table-condensed table-striped" style="width:100%;">
+                <tr>
+                    <td class="bold">Rynek:</td>
+                    <td class="text-right">{% if offer.marketType == 'primary' %}Pierwotny{% else %}Wtórny{% endif %}</td>
+                </tr>
+                <tr>
+                    <td class="bold">Dostępne od:</td>
+                    <td class="text-right">{{ offer.availableFrom|date('Y-m-d') }}</td>
+                </tr>                    
+                <tr>
+                    <td class="bold">Cena:</td>
+                    <td class="text-right"><strong>{{ offer.price }} zł</strong></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-12">
+            
+            <h3>Opis</h3>
+            {{ offer.description|raw }}
+        </div>
+    </div>
+</div>
+
+</div><!-- /.row -->
+
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-xs-12">
+        <h3>Opis</h3>
+        {{ offer.description|raw }}
+    </div><!-- /.col -->
+
+</div><!-- /.row -->
+
+
+
+{% endblock %}

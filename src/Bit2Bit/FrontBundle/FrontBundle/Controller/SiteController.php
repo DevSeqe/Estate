@@ -49,12 +49,26 @@ class SiteController extends Controller {
         return $this->render('FrontBundle:Site:offer.html.twig', array('offer' => $offer));
     }
 
+    public function printOfferAction($id) {
+        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
+        $offer = $offerManager->find($id); /* @var $offer Offer */
+
+        if (!$offer) {
+            return $this->createNotFoundException('Nie znaleźliśmy oferty z takim identyfikatorem! ;(');
+        }
+
+        if (!$offer->getPublished()) {
+            return $this->createNotFoundException('Nie znaleźliśmy oferty z takim identyfikatorem! ;(');
+        }
+        return $this->render('FrontBundle:Site:print.html.twig', array('offer' => $offer));
+    }
+
     public function advicePageAction() {
         return $this->render('FrontBundle:Site:advice.html.twig');
     }
 
     public function contactAction(Request $request, $type) {
-        
+
         $alternatives = array(MailCategory::BUY, MailCategory::OFFER, MailCategory::REPORT, MailCategory::SEARCH);
 
         $mailManager = $this->get(MailManager::SERVICE); /* @var $mailManager MailManager */
@@ -65,7 +79,7 @@ class SiteController extends Controller {
             $mail->setTitle($cats[$type]);
             $mail->setCategory($type);
         }
-        
+
         $form = $this->createForm(new ContactType(), $mail, array(
             'action' => $this->generateUrl('contact'),
             'method' => 'POST',

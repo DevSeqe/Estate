@@ -1,7 +1,7 @@
 {% extends "::frontbase.html.twig" %}
 
 {% block content %}
-    <div class="grayLineBottom">
+    <div class="grayLineBottom pb15">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -10,21 +10,64 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="blackStripe">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4"><div class="icon report"><a href="{{ path('contact',{type:'report'}) }}">zgłoś <strong>nieruchomość</strong>&raquo;</a></div></div>
+                    <div class="col-md-4"><div class="icon buy"><a href="{{ path('contact',{type:'buy'}) }}">kupimy twoją <strong>nieruchomość</strong>&raquo;</a></div></div>
+                    <div class="col-md-4"><div class="icon search"><a href="{{ path('contact',{type:'search'}) }}">zgłoś <strong>poszukiwanie</strong>&raquo;</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>   
     <div class="grayLineBottom">
-        <div class="container m30">
+        <div class="container m15">            
             <div class="row">
                 <div class="col-md-10 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-8 breadcrumb">
+                            &raquo; 
+                            {% if offer.rent %}<a href="{{ path('offers_rent') }}">wynajem</a>{% else %}<a href="{{ path('offers_sell') }}">sprzedaż</a>{% endif %} / 
+                            {% if offer.type == 'flat' %}<a href="{{ path('offers_flats') }}">mieszkania</a>{% elseif offer.type == 'house' %}<a href="{{ path('offers_houses') }}">domy</a>{% elseif offer.type == 'locale' %}<a href="{{ path('offers_locales') }}">lokale</a>{% else %}<a href="{{ path('offers_plots') }}">działki</a>{% endif %} / 
+                            szczegóły oferty
+                        </div>
+                        <div class="col-md-4 offerType text-right">
+                            {{ offer.getType(false) }} {% if offer.rent %}do wynajęcia{% else %}na sprzedaż{% endif %}<br/>
+                            {% if offer.localization is not null %}{{ offer.localization.city }}{% endif %}
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div role="tabpanel">
 
                                 <!-- Nav tabs -->
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab">zdjęcia</a></li>
-                                    {% if offer.video is not null %}<li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">wideo</a></li>{% endif %}
-                                    <li role="presentation"><a href="#map" aria-controls="messages" role="tab" data-toggle="tab">mapa</a></li>
-                                </ul>
+                                <div class="row">
+                                    <div class="col-md-8">                                    
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab">zdjęcia</a></li>
+                                            {% if offer.video is not null %}<li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">wideo</a></li>{% endif %}
+                                            <li role="presentation"><a href="#map" aria-controls="messages" role="tab" data-toggle="tab">mapa</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4 price text-right">
+                                        {% if offer.discount > 0 %}
+                                            <span class="discount">
+                                                <strong>
+                                                    {{ offer.getPrice(false) }}zł
+                                                </strong>
+                                            </span> 
+                                        {% else %}
+                                            {% if offer.commition %}
+                                                <strong class="text-danger">
+                                                    bez prowizji
+                                                </strong> 
+                                            {% endif %}
+                                        {% endif %}
+                                        <strong>
+                                            {{ offer.price }}zł
+                                        </strong>
+                                    </div>
+                                </div>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
@@ -234,6 +277,11 @@
                     <div class="col-md-offset-8 col-md-4">
                         <a class="btn btn-block btn-flat btn-default" href="{{ path('contact_agent',{id:offer.id}) }}">
                             skontaktuj się z agentem &raquo;
+                        </a>
+                    </div>
+                    <div class="col-md-offset-8 col-md-4">
+                        <a class="btn btn-block btn-flat btn-default" target="_blank" href="{{ path('offer_print',{id:offer.id}) }}">
+                            <i class="fa fa-print"></i> wydrukuj ofertę &raquo;
                         </a>
                     </div>
                 </div>

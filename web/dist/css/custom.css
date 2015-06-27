@@ -96,6 +96,7 @@ label.required:after{
 .m30{margin-top:30px;}
 .mb30{margin-bottom:30px;}
 .mb15{margin-bottom:15px;}
+.pb15{padding-bottom:15px;}
 
 .gray{color:#666;}
 
@@ -383,4 +384,56 @@ label.required:after{
 .btn-gray:hover{
     background: #ccc;
     transition: all ease 0.2s;    
+}
+
+.breadcrumb{
+    background: transparent;
+    font-size:20px;
+}
+.breadcrumb a:hover{
+    text-decoration:none;
+}
+
+.offerType{
+    padding: 8px 15px;
+    font-size:20px;
+}
+.price{
+    font-size:25px;
+    /*border-bottom: 1px solid #ddd;*/
+    padding: 3px 15px;
+}
+
+.blackStripe{
+    background: #2A2A2A;
+}
+.blackStripe .col-md-4{
+    padding: 10px 15px;    
+}
+.blackStripe a{
+    color: white;
+    font-size:20px;
+    transition: all ease 0.2s;
+}
+.blackStripe a:hover{
+    text-decoration: none;
+    color: #dcdcdc;
+    transition: all ease 0.2s;
+}
+.blackStripe .icon{
+    height:50px;
+    display:inline-block;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    padding-left:55px;
+    padding-top: 13px;
+}
+.blackStripe .icon.buy{
+    background-image: url('/images/icons/buy.png');
+}
+.blackStripe .icon.report{
+    background-image: url('/images/icons/report.png');
+}
+.blackStripe .icon.search{
+    background-image: url('/images/icons/search.png');
 }

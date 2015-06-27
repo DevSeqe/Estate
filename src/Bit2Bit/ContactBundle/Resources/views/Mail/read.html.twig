@@ -20,6 +20,7 @@
                     <h3>{{ mail.title }}</h3>
                     <h5>Od: {{ mail.name }} &laquo;<a href="mailto:{{ mail.email }}">{{ mail.email }}</a>&raquo;<span class="mailbox-read-time pull-right">{{ mail.created|date('Y-m-d, H:i') }}</span></h5>
                     <h5>Telefon: {{ mail.phone }} </h5>
+                    {% if mail.offer is not null %}<h5>Oferta: <a href="{{ path('offer_details',{id:mail.offer.id}) }}" target="_blank">{{ mail.offer.name }} </a></h5>{% endif %}                
                   </div><!-- /.mailbox-read-info -->
                   {#<div class="mailbox-controls with-border text-center">
                     <div class="btn-group">

@@ -57,6 +57,10 @@
         <default key="_controller">FrontBundle:Site:offer</default>
     </route>
     
+    <route id="offer_print" path="/{id}/oferta/wydrukuj">
+        <default key="_controller">FrontBundle:Site:printOffer</default>
+    </route>
+    
     <route id="advice_page" path="/doradztwo">
         <default key="_controller">FrontBundle:Site:advicePage</default>
     </route>
