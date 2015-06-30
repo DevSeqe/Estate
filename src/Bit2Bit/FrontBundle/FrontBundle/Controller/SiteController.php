@@ -2,7 +2,9 @@
 
 namespace Bit2Bit\FrontBundle\FrontBundle\Controller;
 
+use Bit2Bit\CmsBundle\Entity\Page;
 use Bit2Bit\CmsBundle\Entity\Partner;
+use Bit2Bit\CmsBundle\Manager\PageManager;
 use Bit2Bit\CmsBundle\Manager\PartnerManager;
 use Bit2Bit\ContactBundle\Entity\Mail;
 use Bit2Bit\ContactBundle\Enum\MailCategory;
@@ -46,6 +48,8 @@ class SiteController extends Controller {
                 return $this->createNotFoundException('Nie znaleźliśmy oferty z takim identyfikatorem! ;(');
             }
         }
+        $offer->addView();
+        $offerManager->update($offer);
         return $this->render('FrontBundle:Site:offer.html.twig', array('offer' => $offer));
     }
 
@@ -65,6 +69,43 @@ class SiteController extends Controller {
 
     public function advicePageAction() {
         return $this->render('FrontBundle:Site:advice.html.twig');
+    }
+
+    public function aboutAction() {
+        $pageManager = $this->get(PageManager::SERVICE); /* @var $pageManager PageManager */
+        $page = $pageManager->findOneBySlug('o-nas'); /* @var $page Page */
+        
+        $catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'diplomas';
+        $diplomas = array();
+        if ($handle = opendir($catalog)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    if (!is_dir($catalog . DIRECTORY_SEPARATOR . $entry)) {
+                        $diplomas[] = '/images/diplomas' . DIRECTORY_SEPARATOR . $entry;
+                    }
+                }
+            }
+            closedir($handle);
+        }
+
+        if (!$page) {
+            $page = "";
+        } else {
+            $page = $page->getContent();
+        }
+        return $this->render('FrontBundle:Site:about.html.twig',array('page'=>$page,'diplomas'=>$diplomas));
+    }
+    
+    public function creditsAction() {
+        $pageManager = $this->get(PageManager::SERVICE); /* @var $pageManager PageManager */
+        $page = $pageManager->findOneBySlug('kredyty'); /* @var $page Page */
+
+        if (!$page) {
+            $page = "";
+        } else {
+            $page = $page->getContent();
+        }
+        return $this->render('FrontBundle:Site:credits.html.twig',array('page'=>$page));
     }
 
     public function contactAction(Request $request, $type) {
@@ -110,8 +151,19 @@ class SiteController extends Controller {
             $session->getFlashBag()->add('success', 'Twoja wiadomość została wysłana.');
             return $this->redirect($this->generateUrl('contact'));
         }
+
+        $pageManager = $this->get(PageManager::SERVICE); /* @var $pageManager PageManager */
+        $page = $pageManager->findOneBySlug('kontakt'); /* @var $page Page */
+
+        if (!$page) {
+            $page = "";
+        } else {
+            $page = $page->getContent();
+        }
+
         return $this->render('FrontBundle:Site:contact.html.twig', array(
                     'form' => $form->createView(),
+                    'page' => $page
         ));
     }
 
@@ -153,8 +205,20 @@ class SiteController extends Controller {
             $session->getFlashBag()->add('success', 'Twoja wiadomość została wysłana.');
             return $this->redirect($this->generateUrl('contact_agent', array('id' => $id)));
         }
+
+        $pageManager = $this->get(PageManager::SERVICE); /* @var $pageManager PageManager */
+        $page = $pageManager->findOneBySlug('kontakt'); /* @var $page Page */
+
+        if (!$page) {
+            $page = "";
+        } else {
+            $page = $page->getContent();
+        }
+
+
         return $this->render('FrontBundle:Site:contact.html.twig', array(
                     'form' => $form->createView(),
+                    'page' => $page
         ));
     }
 

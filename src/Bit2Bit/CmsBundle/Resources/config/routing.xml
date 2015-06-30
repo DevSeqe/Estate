@@ -22,4 +22,16 @@
         <default key="_controller">CmsBundle:Partner:remove</default>
         <requirement key="id">\d+</requirement>
     </route>
+    
+    <route id="page" path="/admin/page/">
+        <default key="_controller">CmsBundle:Page:index</default>    
+    </route>
+    
+    <route id="page_edit" path="/admin/page/{id}/edit">
+        <default key="_controller">CmsBundle:Page:edit</default>    
+    </route>
+    
+    <route id="page_diploma" path="/admin/diplomas">
+        <default key="_controller">CmsBundle:Page:manageDiplomas</default>    
+    </route>
 </routes>

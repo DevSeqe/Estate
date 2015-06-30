@@ -1,0 +1,61 @@
+{% extends "::frontbase.html.twig" %}
+
+{% block content %}
+    <div class="grayLineBottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>o nas</h1>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grayLineBottom">
+    <div class="container m30 mb30">
+        <div class="row">
+            <div class="col-md-12">
+                {{ page|raw }}
+            </div>            
+        </div>
+    </div>
+    </div>
+    {% if diplomas|length > 0 %}
+        <div class="m30 mb30">
+            <div class="container m30 mb30">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="bx-partners">
+                            {% if diplomas|length > 6 %}
+                                <a class="buttons prev" href="#"><i class="fa fa-chevron-circle-left"></i></a>
+                                <div class="viewport">
+                                    <div class="overview">
+                                        {% for diploma in diplomas %}                                            
+                                            <a href="{{ diploma }}" target="_blank">
+                                                <img src="{{ diploma }}" class="img-responsive" style="height:200px"/>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <a class="buttons next" href="#"><i class="fa fa-chevron-circle-right"></i></a>
+                                {% else %}
+                                    {% for diploma in diplomas %}                                            
+                                    <div class="col-md-2">
+                                        <a href="{{ diploma }}" target="_blank">
+                                            <img src="{{ diploma }}" class="img-responsive" style="height:200px"/>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block css %}
+    <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+{% endblock %}

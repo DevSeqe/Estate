@@ -25,6 +25,8 @@ class ElementsController extends Controller {
                 ->add('Partnerzy', 'partner', 'fa fa-suitcase', 'ROLE_ADMIN')
                 ->add('Subskrybenci', 'admin_subscriber', 'fa fa-at', 'ROLE_ADMIN')
                 ->add('Newsletter', 'admin_message', 'fa fa-envelope', 'ROLE_ADMIN')
+                ->add('CMS', 'page', 'fa fa-files-o', 'ROLE_ADMIN')
+                ->add('Dyplomy', 'page_diploma', 'fa fa-mortar-board', 'ROLE_ADMIN')
                 ->add('Ustawienia', 'admin_settings', 'fa fa-cogs', 'ROLE_ADMIN');
 
 

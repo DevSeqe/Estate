@@ -3,6 +3,7 @@
 namespace Bit2Bit\OfferBundle\Entity;
 
 use Bit2Bit\OfferBundle\Model\Offer as Base;
+use DateTime;
 
 class Offer extends Base {
 
@@ -46,7 +47,7 @@ class Offer extends Base {
     }
     
     public function getThumbnail() {
-        if(!$this->hasPhotos()){
+        if($this->hasPhotos()){
             return $this->photos[0];
         }    
         return '/images/nophoto.jpg';
@@ -60,6 +61,16 @@ class Offer extends Base {
         }
         $this->videoCode = $parts[1];
         return $this->videoCode;
+    }
+    
+    public function addView(){
+        $this->totalViews++;
+        $now = new DateTime('NOW');
+        if(!isset($this->views[$now->format('Y-m-d')])){
+            $this->views[$now->format('Y-m-d')] = 1;
+        } else {
+            $this->views[$now->format('Y-m-d')]++;
+        }
     }
     
 

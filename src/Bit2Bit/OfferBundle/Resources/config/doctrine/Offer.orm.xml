@@ -29,5 +29,7 @@
         <field name="water" column="water" type="string"/>
         <field name="gas" column="gas" type="string"/>
         <field name="sewerage" column="sewerage" type="string"/>
+        <field name="views" column="views" type="array"/>
+        <field name="totalViews" column="totalViews" type="integer" nullable="true" />
     </entity>
 </doctrine-mapping>

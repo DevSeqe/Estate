@@ -16,6 +16,10 @@
         <default key="_controller">FrontBundle:Site:credits</default>
     </route>
     
+    <route id="about" path="/o-nas">
+        <default key="_controller">FrontBundle:Site:about</default>
+    </route>
+    
     <route id="contact" path="/kontakt/{type}">
         <default key="_controller">FrontBundle:Site:contact</default>
         <default key="type">other</default>

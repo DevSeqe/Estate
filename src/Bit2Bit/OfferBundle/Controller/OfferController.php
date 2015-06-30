@@ -2,6 +2,8 @@
 
 namespace Bit2Bit\OfferBundle\Controller;
 
+use Bit2Bit\ContactBundle\Entity\Mail;
+use Bit2Bit\ContactBundle\Manager\MailManager;
 use Bit2Bit\MainBundle\Base\AbstractController;
 use Bit2Bit\OfferBundle\Entity\Offer;
 use Bit2Bit\OfferBundle\Enum\MarketType;
@@ -125,10 +127,12 @@ class OfferController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            if($offer->getCommition()){
+            if ($offer->getCommition()) {
                 $offer->setDiscount(0);
             }
-            $offer->setSimilar($offerManager->findSimilar($offer));
+            if ($offer->getLocalization()) {
+                $offer->setSimilar($offerManager->findSimilar($offer));
+            }
             $offerManager->update($offer);
             $session->getFlashBag()->add('success', 'Zaktualizowano ofertę.');
             return $this->redirect($this->generateUrl('user_offer'));
@@ -147,6 +151,12 @@ class OfferController extends AbstractController {
         if (!$offer) {
             $session->getFlashBag()->add('danger', 'Nie znaleziono oferty.');
         } else {
+            $mailManager = $this->get(MailManager::SERVICE); /* @var $mailManager MailManager */
+            $mails = $mailManager->findByOffer($offer); /* @var $mails Mail[] */
+            foreach ($mails as $mail) {
+                $mail->setOffer(null);
+                $mailManager->update($mail);
+            }
             $offerManager->remove($offer);
             $session->getFlashBag()->add('success', 'Pomyślnie usunięto ofertę.');
         }

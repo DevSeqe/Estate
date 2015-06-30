@@ -4,8 +4,10 @@ namespace Bit2Bit\OfferBundle\Controller;
 
 use Bit2Bit\MainBundle\Base\AbstractController;
 use Bit2Bit\OfferBundle\Entity\Localization;
+use Bit2Bit\OfferBundle\Entity\Offer;
 use Bit2Bit\OfferBundle\Form\LocalizationType;
 use Bit2Bit\OfferBundle\Manager\LocalizationManager;
+use Bit2Bit\OfferBundle\Manager\OfferManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class LocalizationController extends AbstractController {
@@ -74,8 +76,14 @@ class LocalizationController extends AbstractController {
         if (!$localization) {
             $session->getFlashBag()->add('danger', 'Nie znaleziono lokalizacji.');
         } else {
-            $localizationManager->remove($localization);
-            $session->getFlashBag()->add('success', 'Pomyślnie usunięto lokalizację.');
+            $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
+            $offers = $offerManager->findByLocalization($localization); /* @var $offers Offer[] */
+            if (!$offers) {
+                $localizationManager->remove($localization);
+                $session->getFlashBag()->add('success', 'Pomyślnie usunięto lokalizację.');
+            } else {
+                $session->getFlashBag()->add('warning', 'Nie można usunąć lokalizacji powiązanej z ofertą.');                
+            }
         }
 
         return $this->redirect($this->generateUrl('user_localization'));

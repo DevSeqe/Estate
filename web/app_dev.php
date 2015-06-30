@@ -22,6 +22,13 @@ Debug::enable();
 
 require_once __DIR__.'/../app/AppKernel.php';
 
+
+function p($data){
+    echo "<pre>";
+    Doctrine\Common\Util\Debug::dump($data);
+    die;
+}
+
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();

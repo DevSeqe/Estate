@@ -32,6 +32,8 @@ class Offer extends AbstractEntity {
     protected $water;
     protected $gas;
     protected $sewerage;
+    protected $views;
+    protected $totalViews;
 
     public function getId() {
         return $this->id;
@@ -272,5 +274,25 @@ class Offer extends AbstractEntity {
         $this->sewerage = $sewerage;
         return $this;
     }
+    
+    function getViews() {
+        return $this->views;
+    }
+
+    function getTotalViews() {
+        return $this->totalViews;
+    }
+
+    function setViews($views) {
+        $this->views = $views;
+        return $this;
+    }
+
+    function setTotalViews($totalViews) {
+        $this->totalViews = $totalViews;
+        return $this;
+    }
+
+
 
 }

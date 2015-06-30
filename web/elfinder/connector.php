@@ -39,7 +39,7 @@ function logger($cmd, $result, $args, $elfinder) {
 
 
     $log = sprintf("[%s] %s: %s \n", date('r'), strtoupper($cmd), var_export($result, true));
-    $logfile = getcwd().'/files/temp/log.txt';
+    $logfile = getcwd() . '/files/temp/log.txt';
     $dir = dirname($logfile);
     if (!is_dir($dir) && !mkdir($dir)) {
         return;
@@ -225,13 +225,19 @@ function validName($name) {
 }
 
 //$logger = new elFinderSimpleLogger('files/temp/log.txt');
-$main = realpath(getcwd().'/../');
-$catalog = $main.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'offer'.DIRECTORY_SEPARATOR.$_GET['offer'];
-if(!file_exists($catalog)){
+$main = realpath(getcwd() . '/../');
+if (isset($_GET['diplomas']) && $_GET['diplomas'] == 'true') {
+    $catalog = $main . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'diplomas';   
+    $alias = 'Dyplomy';
+} else {
+    $catalog = $main . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $_GET['offer'];
+    $alias = 'Galeria';
+}
+if (!file_exists($catalog)) {
     $oldmask = umask();
-    umask(0);    
+    umask(0);
     mkdir($catalog, 0777, true);
-    umask($oldmask);    
+    umask($oldmask);
 }
 $opts = array(
     'locale' => 'en_US.UTF-8',
@@ -243,7 +249,7 @@ $opts = array(
         array(
             'driver' => 'LocalFileSystem',
             'path' => $catalog,
-            'alias' => 'Galeria',
+            'alias' => $alias,
             'mimeDetect' => 'internal',
             'tmbPath' => '.tmb',
             'utf8fix' => true,
