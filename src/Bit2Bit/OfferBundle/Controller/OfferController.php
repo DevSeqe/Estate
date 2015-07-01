@@ -102,7 +102,9 @@ class OfferController extends AbstractController {
                 ->setCreated($now)
                 ->setWater('yes')
                 ->setGas('yes')
-                ->setSewerage('yes');
+                ->setSewerage('yes')
+                ->setViews(array())
+                ->setTotalViews(0);
 
         $offerManager->persist($offer)
                 ->flush();

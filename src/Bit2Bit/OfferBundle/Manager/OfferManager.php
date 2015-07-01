@@ -13,11 +13,13 @@ class OfferManager extends AbstractManager {
         $qb = $this->repository->createQueryBuilder('o');
         $qb->where("o.published = ?1")
                 ->andWhere("o.type = ?2")
-                ->andWhere("o.marketType = ?3")
                 ->andWhere("o.rent = ?4");
-        $qb->setParameter(1, true)
-                ->setParameter(2, $data['object_type'])
+        if($data['market_type'] != 'both'){
+            $qb->andWhere("o.marketType = ?3")
                 ->setParameter(3, $data['market_type']);
+        }                
+        $qb->setParameter(1, true)
+                ->setParameter(2, $data['object_type']);                
         if ($data['localization'] != "") {
             $qb->leftJoin('o.localization', 'l');
             $localizationParts = explode(" ", $data['localization']);
