@@ -6,7 +6,7 @@
         </id>        
         <field name="city" column="city" type="string"/>
         <field name="street" column="street" type="string" nullable="true"/>
-        <field name="building" column="building" type="string"/>
+        <field name="building" column="building" type="string" nullable="true"/>
         <field name="latitude" column="latitude" type="string" nullable="true"/>
         <field name="longitude" column="longitude" type="string" nullable="true"/>
     </entity>

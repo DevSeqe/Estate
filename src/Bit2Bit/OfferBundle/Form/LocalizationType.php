@@ -23,7 +23,7 @@ class LocalizationType extends AbstractType {
                 )) 
                 ->add('building',null,array(
                     'label' => 'Numer budynku',
-                    'required' => true
+                    'required' => false
                 )) 
                 ->add('latitude',null,array(
                     'label' => 'Szerokość geo.',

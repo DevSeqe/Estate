@@ -14,13 +14,13 @@ class Offer extends Base {
     private $videoCode;
 
     public function getPrice($discount = true) {
-        if ($discount) {
-            return round(($this->pricePerMeter * $this->area) - $this->discount, 2);
-        } else {
-            return round(($this->pricePerMeter * $this->area), 2);
+        if($discount){
+            return $this->totalPrice - $this->discount;
         }
+        
+        return $this->totalPrice;
     }
-
+    
     public function getPhotos() {
         if(!empty($this->photos)){
             return $this->photos;

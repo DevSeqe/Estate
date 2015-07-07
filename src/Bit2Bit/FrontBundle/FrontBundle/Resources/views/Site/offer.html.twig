@@ -200,7 +200,7 @@
                                 </tr>
                                 <tr>
                                     <td class="bold">Dostępne od:</td>
-                                    <td class="text-right">{{ offer.availableFrom|date('Y-m-d') }}</td>
+                                    <td class="text-right">{% if offer.availableFrom is null %}<strong>do uzgodnienia</strong>{% else %}{{ offer.availableFrom|date('Y-m-d') }}{% endif %}</td>
                                 </tr>                    
                             </table>
                             <h3>Media</h3>
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                     {% endif %}
-                    {#{{ render(controller('MainBundle:Elements:newest')) }}#}
+                    {{ render(controller('MainBundle:Elements:newest')) }}
                 </div>
             </div>
             <div class="container m30">

@@ -118,10 +118,12 @@ class OfferManager extends AbstractManager {
         $qb->where("o.published = ?1")
                 ->leftJoin("o.localization", "l")
                 ->andWhere("o.type = ?2")
-                ->andWhere("l.city LIKE ?3")                
+                ->andWhere("l.city LIKE ?3")     
+                ->andWhere("o.id != ?4")
                 ->setParameter(1, true)
                 ->setParameter(2, $offer->getType())
                 ->setParameter(3, "%".$offer->getLocalization()->getCity()."%")
+                ->setParameter(4, $offer->getId())
                 ->orderBy('o.created', 'DESC')
                 ->setMaxResults(3);
         $query = $qb->getQuery();

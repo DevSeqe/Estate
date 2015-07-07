@@ -24,9 +24,13 @@ class OfferType extends AbstractType {
                     'label' => 'Lokalizacja',
                     'required' => true
                 )) 
-                ->add('pricePerMeter',null,array(
-                    'label' => 'Cena za m kw.',
+                ->add('totalPrice',null,array(
+                    'label' => 'Cena nieruchomości',
                     'required' => true
+                )) 
+                ->add('tags',null,array(
+                    'label' => 'Tagi (poszczególne tagi nalezy odzdzielać przecinkiem)',
+                    'required' => false
                 )) 
                 ->add('area',null,array(
                     'label' => 'Powierzchnia',
@@ -56,7 +60,7 @@ class OfferType extends AbstractType {
                 )) 
                 ->add('availableFrom','date',array(
                     'label' => 'Dostępne od',
-                    'required' => true
+                    'required' => false
                 )) 
                 ->add('description',null,array(
                     'label' => 'Opis',

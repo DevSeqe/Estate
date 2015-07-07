@@ -17,6 +17,16 @@
         <requirement key="id">\d+</requirement>
     </route>
     
+    <route id="user_offer_photos" pattern="/{id}/photos">
+        <default key="_controller">OfferBundle:Offer:getPhotos</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
+    <route id="user_offer_photos_reorder" pattern="/{id}/reorder-photos">
+        <default key="_controller">OfferBundle:Offer:reorderPhotos</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+    
     <route id="user_offer_show" pattern="/{id}/show">
         <default key="_controller">OfferBundle:Offer:show</default>
         <requirement key="id">\d+</requirement>

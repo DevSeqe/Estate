@@ -87,12 +87,12 @@ class OfferController extends AbstractController {
         $offer
                 ->setAgent($user)
                 ->setArea(0)
-                ->setAvailableFrom($now)
                 ->setFloor(0)
                 ->setHotOffer(false)
                 ->setName('Szkic - ' . $now->format('Y-m-d H:i:s'))
                 ->setNumberOfFloors(0)
                 ->setPricePerMeter(0)
+                ->setTotalPrice(0)
                 ->setPublished(false)
                 ->setRent(false)
                 ->setRooms(0)
@@ -130,6 +130,7 @@ class OfferController extends AbstractController {
             if ($offer->getCommition()) {
                 $offer->setDiscount(0);
             }
+            $offer->setPricePerMeter($offer->getTotalPrice() / $offer->getArea());
             if ($offer->getLocalization()) {
                 $offer->setSimilar($offerManager->findSimilar($offer));
             }
@@ -141,6 +142,74 @@ class OfferController extends AbstractController {
                     'form' => $form->createView(),
                     'offer' => $offer
         ));
+    }
+
+    public function getPhotosAction($id) {
+        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
+        $offer = $offerManager->find($id); /* @var $offer Offer */
+
+        $result = array('result' => false);
+        if (!$offer) {
+            return $this->json($result);
+        }
+
+        $result['result'] = true;
+        $result['photos'] = array();
+        $photos = $offer->getPhotos();
+        foreach ($photos as $photo) {
+            $result['photos'][] = $photo;
+        }
+
+        return $this->json($result);
+    }
+
+    public function reorderPhotosAction(Request $request, $id) {
+        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
+        $offer = $offerManager->find($id); /* @var $offer Offer */
+
+        $result = array('result' => false);
+        if (!$offer) {
+            return $this->json($result);
+        }
+
+        $data = $request->request->all();
+
+        if (!isset($data['ids'])) {
+            return $this->json($result);
+        }
+
+
+        $result['result'] = true;
+        $result['photos'] = array();
+        $photos = $offer->getPhotos();
+        $basePath = getcwd();
+        $files = array();
+        foreach ($photos as $photo) {
+            $file = $basePath.$photo;
+            $info = getimagesize($file);
+
+            if ($info['mime'] == 'image/jpeg') {
+                $image = imagecreatefromjpeg($file);
+            } elseif ($info['mime'] == 'image/gif') {
+                $image = imagecreatefromgif($file);
+            } elseif ($info['mime'] == 'image/png') {
+                $image = imagecreatefrompng($file);
+            }
+            unlink($file);
+            $files[] = $image;
+        }
+        
+        
+        $newOrder = explode(",",$data['ids']);
+        $counter = 1;
+        $path = $basePath.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'offer'.DIRECTORY_SEPARATOR.$offer->getSlug();
+        foreach($newOrder as $item){
+            imagejpeg($files[trim($item)], $path.DIRECTORY_SEPARATOR.$counter.'.jpg', 75);
+            $counter++;
+        }
+        $result['result'] = true;
+
+        return $this->json($result);
     }
 
     public function removeAction($id) {

@@ -23,10 +23,12 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Numer oferty</th>                                
+                                <th>Adres</th>                                
+                                <th>Typ nieruchomości</th>                                
                                 <th>Cena</th>
-                                <th>Cena za m<sup>2</sup></th>
+{#                                <th>Cena za m<sup>2</sup></th>#}
                                 <th>Powierzchnia</th>
-                                <th>Obsługujący agent</th>
+                                <th>Agent</th>
                                 <th>Gorąca oferta</th>
                                 <th>Wynajem</th>
                                 <th>Opublikowane</th>
@@ -38,8 +40,10 @@
                                 <tr>
                                     <td>{{ offer.id }}</td>                                    
                                     <td>{{ offer.name }}</td>
+                                    <td>{% if offer.localization is not null %}{{ offer.localization.city }}{% if offer.localization.street is not null %}, ul. {{ offer.localization.street }}{% endif %}{% endif %}</td>
+                                    <td>{% if offer.type == 'flat' %}Mieszkanie{% elseif offer.type == 'house' %}Dom{% elseif offer.type == 'locale' %}Lokal{% else %}Działka{% endif %}</td>
                                     <td>{{ offer.price }}</td>
-                                    <td>{{ offer.pricePerMeter }}</td>
+{#                                    <td>{{ offer.pricePerMeter }}</td>#}
                                     <td>{{ offer.area }}</td>
                                     <td>{{ offer.agent }}</td>
                                     <td><a href="{{ path('user_offer_toggle',{id:offer.id,type:'hotOffer'}) }}">{% if offer.hotOffer %}<span class="label label-success">TAK</span>{% else %}<span class="label label-danger">NIE</span>{% endif %}</a></td>

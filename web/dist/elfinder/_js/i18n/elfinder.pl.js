@@ -100,6 +100,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'cmdcut'       : 'Wytnij',
 			'cmddownload'  : 'Pobierz',
 			'cmdduplicate' : 'Duplikuj',
+			'compress'     : 'Kompresja',
 			'cmdedit'      : 'Edytuj plik',
 			'cmdextract'   : 'Wypakuj pliki z archiwum',
 			'cmdforward'   : 'Dalej',
@@ -134,6 +135,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'btnMount'  : 'Mount',
 
 			/******************************** notifications ********************************/
+			'ntfcompress'     : 'Kompresja plików',
 			'ntfopen'     : 'Otwórz folder',
 			'ntffile'     : 'Otwórz plik',
 			'ntfreload'   : 'Odśwież zawartość folderu',

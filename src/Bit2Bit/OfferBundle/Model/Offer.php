@@ -10,6 +10,7 @@ class Offer extends AbstractEntity {
     protected $name;
     protected $slug;
     protected $localization;
+    protected $totalPrice;
     protected $pricePerMeter;
     protected $area;
     protected $rooms;
@@ -34,6 +35,7 @@ class Offer extends AbstractEntity {
     protected $sewerage;
     protected $views;
     protected $totalViews;
+    protected $tags;
 
     public function getId() {
         return $this->id;
@@ -274,7 +276,7 @@ class Offer extends AbstractEntity {
         $this->sewerage = $sewerage;
         return $this;
     }
-    
+
     function getViews() {
         return $this->views;
     }
@@ -290,6 +292,24 @@ class Offer extends AbstractEntity {
 
     function setTotalViews($totalViews) {
         $this->totalViews = $totalViews;
+        return $this;
+    }
+
+    function getTotalPrice() {
+        return $this->totalPrice;
+    }
+
+    function setTotalPrice($totalPrice) {
+        $this->totalPrice = $totalPrice;
+        return $this;
+    }
+    
+    function getTags() {
+        return $this->tags;
+    }
+
+    function setTags($tags) {
+        $this->tags = $tags;
         return $this;
     }
 
