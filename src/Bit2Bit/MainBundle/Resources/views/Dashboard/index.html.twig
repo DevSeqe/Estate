@@ -1,9 +1,169 @@
 {% extends "::base.html.twig" %}
 
 {% block content %}
-    //TODO :: przygotować widgety na pulpit<br/>
-    *Zgłoszone oferty<br/>
-    *Przysłane wiadomości<br/>
-    *Nowe subskrybcje newslettera<br/>
-    *Zestawienie najczęściej przeglądanych ofert
+    <div class="row">            
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Ostatnio zgłoszone oferty</h3>
+
+                </div><!-- /.box-header -->
+                {% if reports|length > 0 %}
+                    <div class="box-body no-padding">                        
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>      
+                                    {% for report in reports %}
+                                        <tr>           
+                                            <td class="mailbox-star">{% if report.readed %}{% else %}<i class="fa fa-envelope text-green"></i>{% endif %}</td>
+                                            <td class="mailbox-name">{{ report.name }}</td>
+                                            <td class="mailbox-subject {% if report.readed %}{% else %}bold{% endif %}"><a href="{{ path('user_mail_read', {id:report.id}) }}">{{ report.title }}</a></td>                                            
+                                            <td class="mailbox-date">{{ report.created|date('Y-m-d') }}</td>
+                                        </tr>   
+                                    {% endfor %}
+                                </tbody>
+                            </table><!-- /.table -->
+                        </div><!-- /.mail-box-messages -->
+                    </div><!-- /.box-body -->
+                {% else %}
+                    <div class="box-body">
+                        <div class="alert alert-info">
+                            <i class="fa fa-envelope"></i> Brak zgłoszeń do wyświetlenia.
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="box-footer no-padding">
+
+                </div>
+            </div><!-- /. box -->
+        </div><!-- /.col -->
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Ostatnie wiadomości</h3>
+
+                </div><!-- /.box-header -->
+                {% if mails|length > 0 %}
+                    <div class="box-body no-padding">                        
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>      
+                                    {% for mail in mails %}
+                                        <tr>           
+                                            <td class="mailbox-star">{% if mail.readed %}{% else %}<i class="fa fa-envelope text-green"></i>{% endif %}</td>
+                                            <td class="mailbox-name">{{ mail.name }}</td>
+                                            <td class="mailbox-subject {% if mail.readed %}{% else %}bold{% endif %}"><a href="{{ path('user_mail_read', {id:mail.id}) }}">{{ mail.title }}</a></td>                                            
+                                            <td class="mailbox-attachment">{{ mail.label|raw }}</td>
+                                            <td class="mailbox-date">{{ mail.created|date('Y-m-d') }}</td>
+                                        </tr>   
+                                    {% endfor %}
+                                </tbody>
+                            </table><!-- /.table -->
+                        </div><!-- /.mail-box-messages -->
+                    </div><!-- /.box-body -->
+                {% else %}
+                    <div class="box-body">
+                        <div class="alert alert-info">
+                            <i class="fa fa-envelope"></i> Brak wiadomości do wyświetlenia.
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="box-footer no-padding">
+
+                </div>
+            </div><!-- /. box -->
+        </div><!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Najczęściej wyświetlane oferty</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                                <tr>
+                                    <th>Numer oferty</th>
+                                    <th>Adres</th>
+                                    <th>Typ obiektu</th>
+                                    <th>Liczba wyświetleń</th>
+                                    <th>Różnica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for offer in offers %}
+                                    <tr>
+                                        <td><a href="{{ path('offer_details',{id:offer.id}) }}">{{ offer.name }}</a></td>
+                                        <td>{% if offer.localization is not null %}{{ offer.localization.city }}{% if offer.localization.street is not null %}, ul. {{ offer.localization.street }}{% endif %}{% endif %}</td>
+                                        <td>{% if offer.type == 'flat' %}Mieszkanie{% elseif offer.type == 'house' %}Dom{% elseif offer.type == 'locale' %}Lokal{% else %}Działka{% endif %}</td>
+                                        <td>{{ offer.totalViews }}</td>
+                                        <td>
+                                            {% if offer.diff > 0 %}
+                                                <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> +{{ offer.diff }}</span>
+                                            {% elseif offer.diff < 0 %}
+                                                <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> {{ offer.diff }}</span>
+                                            {% else %}
+                                                <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">
+                                            <div class="alert alert-info">
+                                                Brak danych do wyświetlenia.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}                                
+                            </tbody>
+                        </table>
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+
+                </div><!-- /.box-footer -->
+            </div>
+        </div> 
+        <div class="col-md-4">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Najnowsi subskrybenci newslettera</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="products-list product-list-in-box">
+                        {% for subscriber in subscribers %}
+                            <li class="item">    
+                                <span class="product-title">
+                                    {{ subscriber.name }}
+                                    <span class="label label-success pull-right">{{ subscriber.joined|date('Y-m-d') }}</span>
+                                </span>
+                                <span class="product-description">
+                                    {{ subscriber.email }}
+                                </span>
+                            </li><!-- /.item -->
+                        {% else %}
+                            <li class="item">
+                                <div class="alert alert-info">
+                                    W systemie nie ma subskrybentów.
+                                </div>
+                            </li>
+                        {% endfor %}                        
+                    </ul>
+                </div><!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a href="{{ path('admin_subscriber') }}" class="uppercase">Pokaż wszystkich</a>
+                </div><!-- /.box-footer -->
+            </div>
+        </div>
+    </div>
 {% endblock %}

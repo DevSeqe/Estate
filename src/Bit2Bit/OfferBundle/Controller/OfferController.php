@@ -22,6 +22,20 @@ class OfferController extends AbstractController {
         $offers = $offerManager->findAll(); /* @var $offers Offer[] */
         return $this->render(self::NAME . ':index.html.twig', array('offers' => $offers));
     }
+    
+    public function infiniteAction(Request $request) {
+        $data = $request->request->all();
+        $offset = (isset($data['number'])) ? $data['number'] : false;
+        $session = $this->get('session');
+        $searchTerms = $session->get('searchTerms');
+        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */        
+        if(empty($searchTerms)){
+            $offers = $offerManager->findNext($offset); /* @var $offers Offer[] */            
+        } else {
+            $offers = $offerManager->searchOffers($searchTerms, $offset); /* @var $offers Offer[] */                        
+        }
+        return $this->render(self::NAME . ':infinite.html.twig', array('offers' => $offers));
+    }
 
     public function toggleAction($id, $type) {
         $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
@@ -132,7 +146,11 @@ class OfferController extends AbstractController {
             if ($offer->getCommition()) {
                 $offer->setDiscount(0);
             }
-            $offer->setPricePerMeter($offer->getTotalPrice() / $offer->getArea());
+            if($offer->getTotalPrice() != 0 && $offer->getArea() != 0){
+                $offer->setPricePerMeter($offer->getTotalPrice() / $offer->getArea());
+            } else {
+                $offer->setPricePerMeter(0);
+            }
             if ($offer->getLocalization()) {
                 $offer->setSimilar($offerManager->findSimilar($offer));
             }

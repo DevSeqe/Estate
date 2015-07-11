@@ -3,6 +3,7 @@
 namespace Bit2Bit\OfferBundle\Entity;
 
 use Bit2Bit\OfferBundle\Model\Offer as Base;
+use DateInterval;
 use DateTime;
 
 class Offer extends Base {
@@ -12,17 +13,18 @@ class Offer extends Base {
 
     private $photos = array();
     private $videoCode;
+    private $diff = null;
 
     public function getPrice($discount = true) {
-        if($discount){
+        if ($discount) {
             return $this->totalPrice - $this->discount;
         }
-        
+
         return $this->totalPrice;
     }
-    
+
     public function getPhotos() {
-        if(!empty($this->photos)){
+        if (!empty($this->photos)) {
             return $this->photos;
         }
         $catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug();
@@ -40,38 +42,64 @@ class Offer extends Base {
         return $this->photos;
     }
 
-    public function hasPhotos(){
+    public function hasPhotos() {
         $photos = $this->getPhotos();
         $has = !empty($photos);
         return $has;
     }
-    
+
     public function getThumbnail() {
-        if($this->hasPhotos()){
+        if ($this->hasPhotos()) {
             return $this->photos[0];
-        }    
+        }
         return '/images/nophoto.jpg';
     }
-        
-    public function getVideoCode(){        
+
+    public function getVideoCode() {
         $parts = explode("?v=", $this->getVideo());
-        
-        if(!isset($parts[1])){
+
+        if (!isset($parts[1])) {
             return '';
         }
         $this->videoCode = $parts[1];
         return $this->videoCode;
     }
-    
-    public function addView(){
+
+    public function addView() {
         $this->totalViews++;
         $now = new DateTime('NOW');
-        if(!isset($this->views[$now->format('Y-m-d')])){
-            $this->views[$now->format('Y-m-d')] = 1;
+        if (!isset($this->views[$now->format('Y-m-d')])) {
+            $this->views[$now->format('Y-m-d')] = 1;            
         } else {
-            $this->views[$now->format('Y-m-d')]++;
+            $this->views[$now->format('Y-m-d')] ++;
         }
     }
-    
+
+    function getDiff() {
+        if ($this->diff == null) {
+            $this->diff = $this->getViewDifference();
+        }
+        return $this->diff;
+    }
+
+    function setDiff($diff) {
+        $this->diff = $diff;
+        return $this;
+    }
+
+    public function getViewDifference() {
+        $now = new DateTime('NOW');
+        $day = new DateInterval('P1D');
+        $yesterday = clone $now;
+        $yesterday->sub($day);
+
+        $viewsYesterday = (isset($this->views[$yesterday->format('Y-m-d')])) ? $this->views[$yesterday->format('Y-m-d')] : 0;
+        $viewsToday = (isset($this->views[$now->format('Y-m-d')])) ? $this->views[$now->format('Y-m-d')] : 0;
+
+//        p($viewsYesterday);die;
+
+        $diff = $viewsToday - $viewsYesterday;
+        return $diff;
+    }
 
 }

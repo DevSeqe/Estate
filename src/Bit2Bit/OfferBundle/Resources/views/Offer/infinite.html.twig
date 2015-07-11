@@ -1,0 +1,53 @@
+{% for offer in offers %}
+    <div class="col-md-6">
+        <div class="offerBox">
+            <div class="offerThumbnail"><img src="{{ offer.getThumbnail }}" class="img-responsive"/></div>
+                {% if offer.hotOffer %}
+                <div class="hotOffer"></div>
+            {% endif  %}
+            <div class="offerDescription">
+                <table class="table table-condensed no-border">
+                    <tr>
+                        <td>
+                            <strong>{{ offer.getType(false) }} {% if offer.rent %}do wynajęcia{% else %}na sprzedaż{% endif %}</strong>
+                        </td>
+                        <td class="text-right gray">
+                            {% if offer.discount > 0 %}
+                                <span class="discount">
+                                    <strong>
+                                        {{ offer.getPrice(false) }}zł
+                                    </strong>
+                                </span>
+                            {% else %}
+                                <strong>
+                                    {{ offer.price }}zł
+                                </strong>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ offer.localization.city }}
+                            {% if offer.localization.street is not null %}
+                                <br/>ul. {{ offer.localization.street }}
+                            {% endif %}
+                        </td>
+                        <td class="text-right pull-down">
+                            {% if offer.discount > 0 %}
+                                <strong class="gray">
+                                    {{ offer.getPrice(true) }}zł
+                                </strong><br/>                     
+                            {% endif %}
+                            {% if offer.commition %}
+                                <strong class="text-danger">
+                                    bez prowizji
+                                </strong><br/> 
+                            {% endif %}
+                            <a href="{{ path('offer_details',{id:offer.id}) }}" class="gray">szczegóły >></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -18,8 +18,8 @@ class MarketType {
     
     static function getList(){
         return array(
-            self::PRIMARY => 'rynek wtórny',
-            self::SECONDARY => 'rynek pierwotny',
+            self::SECONDARY => 'rynek wtórny',
+            self::PRIMARY => 'rynek pierwotny',
         );
     }
 }

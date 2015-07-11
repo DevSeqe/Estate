@@ -316,8 +316,8 @@ label.required:after{
     float:right;
 }
 .newestOffer .thumb{
-    width:85px;
-    height:85px;
+    width:100px;
+    height:100px;
     background-size:cover;
     background-position: center;
     background-repeat:no-repeat;
@@ -466,3 +466,7 @@ label.required:after{
 .notice_success { background: #657E3F; }
 
 .gallery img{ width:230px; height: 155px;}
+
+.infiniteSpinner{
+    display: none;
+}

@@ -4,5 +4,9 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>        
-    <field name="name" column="name" type="string"/><field name="email" column="email" type="string"/><field name="active" column="active" type="boolean"/></entity>
+        <field name="name" column="name" type="string"/>
+        <field name="email" column="email" type="string"/>
+        <field name="active" column="active" type="boolean"/>
+        <field name="joined" column="joined" type="date"/>
+    </entity>
 </doctrine-mapping>

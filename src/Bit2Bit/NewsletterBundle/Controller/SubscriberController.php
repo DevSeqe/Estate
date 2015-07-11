@@ -6,6 +6,7 @@ use Bit2Bit\MainBundle\Base\AbstractController;
 use Bit2Bit\NewsletterBundle\Entity\Subscriber;
 use Bit2Bit\NewsletterBundle\Form\SubscriberType;
 use Bit2Bit\NewsletterBundle\Manager\SubscriberManager;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 
 class SubscriberController extends AbstractController {
@@ -29,7 +30,9 @@ class SubscriberController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $now = new DateTime('NOW');
             $session = $this->get('session');
+            $subscriber->setJoined($now);
             $subscriberManager->persist($subscriber)
                     ->flush();
             $session->getFlashBag()->add('success', 'Dodano nowego subskrybenta.');
@@ -102,10 +105,11 @@ class SubscriberController extends AbstractController {
 
         $subscriberManager = $this->get(SubscriberManager::SERVICE); /* @var $subscriberManager SubscriberManager */
         $subscriber = new Subscriber();
-
+        $now = new DateTime('NOW');
         $subscriber->setName('')
                 ->setEmail($data['email'])
-                ->setActive(true);
+                ->setActive(true)
+                ->setJoined($now);
         $subscriberManager->persist($subscriber)
                 ->flush();
         $session->getFlashBag()->add('success', 'Adres email dodano do subskrypcji.');

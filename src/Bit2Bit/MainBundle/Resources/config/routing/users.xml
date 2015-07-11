@@ -8,6 +8,10 @@
         <default key="_controller">MainBundle:Users:index</default>    
     </route>
     
+    <route id="user_edit" path="/edit">
+        <default key="_controller">MainBundle:Users:edit</default>    
+    </route>
+    
     <route id="panel_users_send_mail" path="/{id}/mail">
         <default key="_controller">MainBundle:Users:sendActivationMail</default>    
         <requirement key="id">\d+</requirement>

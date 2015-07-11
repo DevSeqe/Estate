@@ -7,7 +7,7 @@
                 <h1>{{ title }}</h1>     
             </div>
         </div>
-        <div class="row">
+        <div class="row offersCont">
             {% for offer in offers %}
                 <div class="col-md-6">
                     <div class="offerBox">
@@ -66,6 +66,42 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="row text-center infiniteSpinner">
+            <div class="col-md-12"><h3><i class="fa fa-spin fa-spinner"></i></h3></div>
+        </div>
     </div>
 
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(window).scroll(function ()
+        {
+            if ($(window).scrollTop() == $(document).height() - $(window).height())
+            {
+                $('.infiniteSpinner').show();
+                var count = $('.offerBox').length;
+                $.ajax({
+                    url: "{{ path('offer_infinite') }}",
+                    method: "POST",
+                    data: {
+                      number: count  
+                    },
+                    success: function (html)
+                    {
+                        if (html)
+                        {
+                            $(".offersCont").append(html);
+                            $('.infiniteSpinner').hide();
+                        } else
+                        {                            
+                            $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
+                        }
+                    }
+                }).fail(function(){
+                    $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
+                });
+            }
+        });
+    </script>
 {% endblock %}

@@ -6,6 +6,7 @@ use Bit2Bit\MainBundle\Base\AbstractController;
 use Bit2Bit\MainBundle\Entity\User;
 use Bit2Bit\MainBundle\Form\ActivateAccountType;
 use Bit2Bit\MainBundle\Form\NewUserType;
+use Bit2Bit\MainBundle\Form\UserType;
 use Bit2Bit\MainBundle\Manager\UserManager;
 use DateTime;
 use Swift_Message;
@@ -78,6 +79,36 @@ class UsersController extends AbstractController {
             return $this->redirect($this->generateUrl('panel_users'));
         }
         return $this->render(self::NAME . ':new.html.twig', array(
+                    'form' => $form->createView(),
+        ));
+    }
+    
+    public function editAction(Request $request){
+        $user = $this->get('security.context')->getToken()->getUser(); /* @var $user User */
+        $pass = $user->getPassword();
+        
+        $form = $this->createForm(new UserType(), $user, array(
+            'action' => $this->generateUrl('user_edit'),
+            'method' => 'POST',
+        ));
+        $form->handleRequest($request);        
+        
+        if ($form->isValid()) {
+            $userManager = $this->get(UserManager::SERVICE); /* @var $userManager UserManager */
+            if($user->getPassword() != ""){
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $encodedPass = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                $user->setPassword($encodedPass);
+            } else {
+                $this->setPassword($pass);
+            }
+            $session = $this->get('session');            
+            $userManager->update($user);
+            $session->getFlashBag()->add('success', 'Pomyślnie zaktualizowano profil.');
+            
+            return $this->redirect($this->generateUrl('panel_dashboard'));
+        }
+        return $this->render(self::NAME . ':edit.html.twig', array(
                     'form' => $form->createView(),
         ));
     }

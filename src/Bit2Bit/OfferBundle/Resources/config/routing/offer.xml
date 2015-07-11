@@ -11,6 +11,10 @@
     <route id="user_offer_new" path="/new">
         <default key="_controller">OfferBundle:Offer:new</default>    
     </route>
+    
+    <route id="offer_infinite" path="/infinite">
+        <default key="_controller">OfferBundle:Offer:infinite</default>    
+    </route>
        
     <route id="user_offer_edit" pattern="/{id}/edit">
         <default key="_controller">OfferBundle:Offer:edit</default>

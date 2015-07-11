@@ -29,7 +29,9 @@ class SiteController extends Controller {
 
     public function offersAction() {
         $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
-        $offers = $offerManager->findBy(array('published' => true)); /* @var $offers Offer[] */
+        $session = $this->get('session');
+        $session->set('searchTerms', array());
+        $offers = $offerManager->findFirst(); /* @var $offers Offer[] */
 
         return $this->render('FrontBundle:Site:offers.html.twig', array('offers' => $offers, 'title' => 'nieruchomości'));
     }
@@ -184,7 +186,8 @@ class SiteController extends Controller {
         $mailManager = $this->get(MailManager::SERVICE); /* @var $mailManager MailManager */
         $mail = new Mail();
 
-        $mail->setTitle('Kontakt w sprawie oferty.');
+        $mail->setTitle('Kontakt w sprawie oferty.')
+                ->setCategory(MailCategory::OFFER);
 
         $form = $this->createForm(new ContactAgentType(), $mail, array(
             'action' => $this->generateUrl('contact_agent', array('id' => $id)),
@@ -224,6 +227,9 @@ class SiteController extends Controller {
 
     public function searchAction(Request $request) {
         $data = $request->request->all();
+        
+        $session = $this->get('session');
+        $session->set('searchTerms', $data);
 
         if (!empty($data)) {
             $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
