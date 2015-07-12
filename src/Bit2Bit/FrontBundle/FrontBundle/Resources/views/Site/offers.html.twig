@@ -77,7 +77,9 @@
     <script type="text/javascript">
         $(window).scroll(function ()
         {
-            if ($(window).scrollTop() == $(document).height() - $(window).height())
+            var curHeight = $(window).scrollTop() + 300
+            var eod = $(document).height() - $(window).height();
+            if (curHeight >= eod)
             {
                 $('.infiniteSpinner').show();
                 var count = $('.offerBox').length;

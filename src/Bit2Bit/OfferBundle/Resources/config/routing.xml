@@ -7,5 +7,12 @@
     <import resource="@OfferBundle/Resources/config/routing/localization.xml" prefix="/panel/localization" />  
     <import resource="@OfferBundle/Resources/config/routing/offer.xml" prefix="/panel/offer" />  
     <import resource="@OfferBundle/Resources/config/routing/gallery.xml" prefix="/panel/gallery" />  
+
+
+    <route id="offer_infinite" path="/infinite">
+        <default key="_controller">OfferBundle:Offer:infinite</default>    
+    </route>
+
+
     
 </routes>
