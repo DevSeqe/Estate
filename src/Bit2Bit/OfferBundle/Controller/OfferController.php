@@ -22,17 +22,17 @@ class OfferController extends AbstractController {
         $offers = $offerManager->findAll(); /* @var $offers Offer[] */
         return $this->render(self::NAME . ':index.html.twig', array('offers' => $offers));
     }
-    
+
     public function infiniteAction(Request $request) {
         $data = $request->request->all();
         $offset = (isset($data['number'])) ? $data['number'] : false;
         $session = $this->get('session');
         $searchTerms = $session->get('searchTerms');
-        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */        
-        if(empty($searchTerms)){
-            $offers = $offerManager->findNext($offset); /* @var $offers Offer[] */            
+        $offerManager = $this->get(OfferManager::SERVICE); /* @var $offerManager OfferManager */
+        if (empty($searchTerms)) {
+            $offers = $offerManager->findNext($offset); /* @var $offers Offer[] */
         } else {
-            $offers = $offerManager->searchOffers($searchTerms, $offset); /* @var $offers Offer[] */                        
+            $offers = $offerManager->searchOffers($searchTerms, $offset); /* @var $offers Offer[] */
         }
         return $this->render(self::NAME . ':infinite.html.twig', array('offers' => $offers));
     }
@@ -146,7 +146,7 @@ class OfferController extends AbstractController {
             if ($offer->getCommition()) {
                 $offer->setDiscount(0);
             }
-            if($offer->getTotalPrice() != 0 && $offer->getArea() != 0){
+            if ($offer->getTotalPrice() != 0 && $offer->getArea() != 0) {
                 $offer->setPricePerMeter($offer->getTotalPrice() / $offer->getArea());
             } else {
                 $offer->setPricePerMeter(0);
@@ -204,29 +204,24 @@ class OfferController extends AbstractController {
         $photos = $offer->getPhotos();
         $basePath = getcwd();
         $files = array();
-        foreach ($photos as $photo) {
-            $file = $basePath.$photo;
-            $info = getimagesize($file);
-
-            if ($info['mime'] == 'image/jpeg') {
-                $image = imagecreatefromjpeg($file);
-            } elseif ($info['mime'] == 'image/gif') {
-                $image = imagecreatefromgif($file);
-            } elseif ($info['mime'] == 'image/png') {
-                $image = imagecreatefrompng($file);
-            }
-            unlink($file);
-            $files[] = $image;
-        }
-        
-        
-        $newOrder = explode(",",$data['ids']);
         $counter = 1;
-        $path = $basePath.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'offer'.DIRECTORY_SEPARATOR.$offer->getSlug();
-        foreach($newOrder as $item){
-            imagejpeg($files[trim($item)], $path.DIRECTORY_SEPARATOR.$counter.'.jpg', 75);
+        $path = $basePath . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $offer->getSlug();
+        foreach ($photos as $photo) {
+            $file = $basePath . $photo;
+            $tFile = $path. DIRECTORY_SEPARATOR . 'temp_' . $counter.'.jpg';
+
+            rename($file, $tFile);
+            $image = $tFile;
+
+            $files[] = $image;
             $counter++;
         }
+        $newOrder = explode(",", $data['ids']);
+        $counter = 1;        
+        foreach ($newOrder as $item) {
+            $renameRes = rename($files[trim($item)], $path . DIRECTORY_SEPARATOR . $counter . '.jpg');
+            $counter++;
+        }        
         $result['result'] = true;
 
         return $this->json($result);

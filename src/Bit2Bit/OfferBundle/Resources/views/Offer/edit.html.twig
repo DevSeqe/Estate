@@ -80,10 +80,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Zarządzanie galerią</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="alert alert-info">
-                        <i class="fa fa-info-circle"></i> Zdjęcia w widoku oferty wyświetlane są w kolejności alfabetycznej, pierwsze zdjęcie będzie ustawione jako miniaturka.                        
-                    </div>
+                <div class="modal-body">                    
                     <div class="row">
                         <div class="col-md-12">
                             <div id="elfinder">
@@ -105,12 +102,19 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Organizacja zdjęć w galerii</h4>
                 </div>
-                <div class="modal-body">                    
+                <div class="modal-body">  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-info">
+                                <i class="fa fa-info-circle"></i> <strong>Uwaga!</strong> Po zapisaniu nowej kolejności zdjęć zmiany są dokonywane po stronie serwera. Po stronie użytkownika, wszystkie zdjęcia zapisywane są w pamięci podręcznej przeglądarki. Zmiany będą widoczne przy ponownym uruchomineiu edycji oferty. <hr/> W podglądzie oferty zmiany widoczne są od razu.
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="gallery">
                                 <ul class="reorder_ul reorder-photos-list" id="photos">
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -152,7 +156,7 @@
             $('#galleryModal').modal('show');
         });
         $('.btn-organize-photos').on('click', function () {
-            printAlert('info','Trwa pobieranie zdjęć oferty, proszę zaczekać.', true);
+            printAlert('info', 'Trwa pobieranie zdjęć oferty, proszę zaczekać.', true);
             $.ajax("{{ path('user_offer_photos',{id:offer.id}) }}").done(function (data) {
                 if (!data.result) {
                     printAlert('danger', 'Wystąpił błąd podczas pobierania zdjęć dla tej oferty.', true);
@@ -178,7 +182,7 @@
                                     data: {ids: " " + h + ""},
                                     success: function (html)
                                     {
-                                        printAlert('success','Pomyślnie zmodyfikowano kolejność zdjęć.',true);
+                                        printAlert('success', 'Pomyślnie zmodyfikowano kolejność zdjęć.', true);
                                         $('.modal').modal('hide');
                                     }
                                 });

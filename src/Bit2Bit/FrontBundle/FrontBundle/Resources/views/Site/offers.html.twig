@@ -75,34 +75,40 @@
 
 {% block js %}
     <script type="text/javascript">
+        window.loading = false;
         $(window).scroll(function ()
         {
             var curHeight = $(window).scrollTop() + 300
             var eod = $(document).height() - $(window).height();
+            console.log(curHeight+ " " + eod);
             if (curHeight >= eod)
             {
-                $('.infiniteSpinner').show();
-                var count = $('.offerBox').length;
-                $.ajax({
-                    url: "{{ path('offer_infinite') }}",
-                    method: "POST",
-                    data: {
-                      number: count  
-                    },
-                    success: function (html)
-                    {
-                        if (html)
+                if(!window.loading){
+                    window.loading = true;
+                    $('.infiniteSpinner').show();
+                    var count = $('.offerBox').length;
+                    $.ajax({
+                        url: "{{ path('offer_infinite') }}",
+                        method: "POST",
+                        data: {
+                          number: count  
+                        },
+                        success: function (html)
                         {
-                            $(".offersCont").append(html);
-                            $('.infiniteSpinner').hide();
-                        } else
-                        {                            
-                            $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
+                            if (html)
+                            {
+                                $(".offersCont").append(html);
+                                $('.infiniteSpinner').hide();
+                            } else
+                            {                            
+                                $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
+                            }
+                            window.loading = false;
                         }
-                    }
-                }).fail(function(){
-                    $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
-                });
+                    }).fail(function(){
+                        $('.infiniteSpinner').html('<div class="alert alert-info text-center"><strong>Brak ofert do wyświetlenia.</strong></div>');
+                    });
+                }
             }
         });
     </script>
