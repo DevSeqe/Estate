@@ -14,7 +14,7 @@ class LocalizationType extends AbstractType {
 
         $builder
                 ->add('city', null, array(
-                    'label' => 'Miasto/Miejscowość',
+                    'label' => 'Kraj/Miasto/Miejscowość/Dzielnica',
                     'required' => true           
                 ))
                 ->add('street',null,array(

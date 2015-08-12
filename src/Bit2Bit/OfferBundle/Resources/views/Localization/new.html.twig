@@ -116,7 +116,10 @@
                 }
             }
             address += " " + $('#create_localization_building').val();
+            console.log(address);
             geocoder.geocode({'address': address}, function (results, status) {
+                console.log(results);
+                console.log(results[0].geometry);
                 if (status == google.maps.GeocoderStatus.OK) {
                     $('.btn-show-geo').removeClass('disabled');
                     $('.geosNr').text(results.length);
@@ -127,8 +130,8 @@
                         map: map,
                         position: results[0].geometry.location
                     });
-                    $('#create_localization_latitude').val(results[0].geometry.location.A);
-                    $('#create_localization_longitude').val(results[0].geometry.location.F);
+                    $('#create_localization_latitude').val(results[0].geometry.location.lat());
+                    $('#create_localization_longitude').val(results[0].geometry.location.lng());
                     $('.geosTab').html('');
                     $.each(results, function () {
                         createRow(this).appendTo('.geosTab');
@@ -148,7 +151,7 @@
             function createRow(data) {
                 var row = $('<tr></tr>');
                 row.append('<td>' + data.formatted_address + '</td>');
-                row.append('<td><button type="button" class="btn btn-sm btn-primary btn-select" data-lat="' + data.geometry.location.A + '" data-lng="' + data.geometry.location.F + '"><i class="fa fa-map-marker"></i></button></td>');
+                row.append('<td><button type="button" class="btn btn-sm btn-primary btn-select" data-lat="' + data.geometry.location.lat() + '" data-lng="' + data.geometry.location.lng() + '"><i class="fa fa-map-marker"></i></button></td>');
                 return row;
             }
             $('.geosTab').on('click', '.btn-select', function () {
