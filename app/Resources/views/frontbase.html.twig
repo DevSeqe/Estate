@@ -6,6 +6,8 @@
         <title>{{ setting.get('base:name') }}</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        {% block meta %}
+        {% endblock %}
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!--[if lt IE 9]>
                 <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>

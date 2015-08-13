@@ -1,5 +1,12 @@
 {% extends "::frontbase.html.twig" %}
 
+{% block meta %}
+    <meta property="og:title" content="{{ offer.getType(false) }} {% if offer.rent %}do wynajęcia{% else %}na sprzedaż{% endif %}, {% if offer.localization is not null %}{{ offer.localization.city }}{% endif %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ app.request.schemeAndHttpHost~app.request.requestUri }}" />
+    <meta property="og:image" content="{{ app.request.schemeAndHttpHost~offer.getThumbnail }}" />
+{% endblock %}
+
 {% block content %}
     <div class="grayLineBottom pb15">
         <div class="container">
