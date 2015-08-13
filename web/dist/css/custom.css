@@ -314,6 +314,7 @@ label.required:after{
 .newestOffer .desc{
     display:inline-block;
     float:right;
+    width:120px;
 }
 .newestOffer .thumb{
     width:100px;
