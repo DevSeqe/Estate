@@ -5,6 +5,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ app.request.schemeAndHttpHost~app.request.requestUri }}" />
     <meta property="og:image" content="{{ app.request.schemeAndHttpHost~offer.getThumbnail }}" />
+    <meta property="og:description" content="{{ offer.decription }}" />
 {% endblock %}
 
 {% block content %}
