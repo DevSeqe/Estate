@@ -108,6 +108,7 @@ label.required:after{
     border: 1px solid #aaa;
     margin:5px;
     position:relative;
+    height:360px;
 }
 .offerBox .hotOffer{
     background-image: url('/images/hot_offer.png');

@@ -12,6 +12,7 @@ class Offer extends Base {
     const ENN = 'Bit2Bit\OfferBundle\Entity\Offer';
 
     private $photos = array();
+    private $plan = null;
     private $videoCode;
     private $diff = null;
 
@@ -42,6 +43,27 @@ class Offer extends Base {
         return $this->photos;
     }
 
+    public function getPlan() {
+        if (!empty($this->plan)) {
+            return $this->plan;
+        }
+        $catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan';
+        if (file_exists($catalog)) {
+            if ($handle = opendir($catalog)) {
+                while (false !== ($entry = readdir($handle))) {
+                    if ($entry != "." && $entry != "..") {
+                        if (!is_dir($catalog . DIRECTORY_SEPARATOR . $entry)) {
+                            $this->plan = '/images/offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan' . DIRECTORY_SEPARATOR . $entry;
+                            break;
+                        }
+                    }
+                }
+                closedir($handle);
+            }
+        }
+        return $this->plan;
+    }
+
     public function hasPhotos() {
         $photos = $this->getPhotos();
         $has = !empty($photos);
@@ -69,7 +91,7 @@ class Offer extends Base {
         $this->totalViews++;
         $now = new DateTime('NOW');
         if (!isset($this->views[$now->format('Y-m-d')])) {
-            $this->views[$now->format('Y-m-d')] = 1;            
+            $this->views[$now->format('Y-m-d')] = 1;
         } else {
             $this->views[$now->format('Y-m-d')] ++;
         }

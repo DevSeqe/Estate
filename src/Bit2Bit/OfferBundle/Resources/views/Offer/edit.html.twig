@@ -78,9 +78,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close help" style="margin-right:10px;" aria-label="Help"><span aria-hidden="true">?</span></button>
                     <h4 class="modal-title">Zarządzanie galerią</h4>
                 </div>
-                <div class="modal-body">                    
+                <div class="modal-body">    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="display: none;" class="helpBlock alert alert-info">
+                                <strong>Obsługa menadżera plików</strong>
+                                <hr/>
+                                <p>Aby dodać nowe pliki należy nacisnąć przycisk z ikoną dyskietki z plusem.</p>
+                                <p>Aby dodać nowy katalog należy nacisnąć prawym przyciskiem myszy i wybrać "nowy folder"</p>
+                                <hr />
+                                <p>Aby dodać plan mieszkania do osobnej zakładki w widoku oferty należy utworzyć folder o nazwie "plan", i umieścić w nim plan mieszkania. <br/><strong>Uwaga!</strong> Tylko jeden plik będzie pobierany z tego katalogu.</p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div id="elfinder">
@@ -154,6 +167,9 @@
     <script type="text/javascript">
         $('.btn-gallery').on('click', function () {
             $('#galleryModal').modal('show');
+        });
+        $('.help').on('click',function(){
+            $('.helpBlock').show();
         });
         $('.btn-organize-photos').on('click', function () {
             printAlert('info', 'Trwa pobieranie zdjęć oferty, proszę zaczekać.', true);

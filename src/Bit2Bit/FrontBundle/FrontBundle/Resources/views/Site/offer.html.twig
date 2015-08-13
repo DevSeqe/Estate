@@ -5,7 +5,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ app.request.schemeAndHttpHost~app.request.requestUri }}" />
     <meta property="og:image" content="{{ app.request.schemeAndHttpHost~offer.getThumbnail }}" />
-    <meta property="og:description" content="{{ offer.decription }}" />
+    <meta property="og:description" content="{{ offer.description }}" />
 {% endblock %}
 
 {% block content %}
@@ -54,6 +54,7 @@
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation" class="active"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab">zdjęcia</a></li>
                                             {% if offer.video is not null %}<li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">wideo</a></li>{% endif %}
+                                            {% if offer.plan is not null %}<li role="presentation"><a href="#plan" aria-controls="profile" role="tab" data-toggle="tab">plan mieszkania</a></li>{% endif %}
                                             <li role="presentation"><a href="#map" aria-controls="messages" role="tab" data-toggle="tab">mapa</a></li>
                                         </ul>
                                     </div>
@@ -132,6 +133,15 @@
                                             <div class="row m30">                                    
                                                 <div class="col-md-6 col-md-offset-3">                                    
                                                     <iframe style="width:100%;" height="315" src="https://www.youtube.com/embed/{{ offer.videoCode }}" frameborder="0" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if offer.plan is not null %}
+                                        <div role="tabpanel" class="tab-pane" id="plan">
+                                            <div class="row m30">                                    
+                                                <div class="col-md-10 col-md-offset-1">   
+                                                    <img style="margin:auto;width:100%" src="{{ offer.plan }}" alt="Plan mieszkania" />                                                    
                                                 </div>
                                             </div>
                                         </div>
