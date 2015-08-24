@@ -16,7 +16,7 @@
                             <div class="hotOffer"></div>
                         {% endif  %}
                         <div class="offerDescription">
-                            <table class="table table-condensed no-border">
+                            <table class="table table-condensed no-border table-striped">
                                 <tr>
                                     <td>
                                         <strong>{{ offer.getType(false) }} {% if offer.rent %}do wynajęcia{% else %}na sprzedaż{% endif %}</strong>
@@ -34,6 +34,14 @@
                                             </strong>
                                         {% endif %}
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>Liczba pokoi</td>
+                                    <td class="text-right">{{ offer.rooms }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Powierzchnia</td>
+                                    <td class="text-right">{{ offer.area }}</td>
                                 </tr>
                                 <tr>
                                     <td>

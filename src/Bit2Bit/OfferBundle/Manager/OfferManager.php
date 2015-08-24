@@ -125,7 +125,7 @@ class OfferManager extends AbstractManager {
         $qb = $this->repository->createQueryBuilder('o');
         $qb->where("o.published = ?1")
                 ->setParameter(1, true)
-                ->orderBy('o.created', 'DESC')
+                ->orderBy('o.id', 'DESC')
                 ->setMaxResults(3);
         $query = $qb->getQuery();
         $offers = $query->execute(); /* @var $offers Offer[] */
@@ -137,7 +137,7 @@ class OfferManager extends AbstractManager {
         $qb = $this->repository->createQueryBuilder('o');
         $qb->where("o.published = ?1")
                 ->setParameter(1, true)
-                ->orderBy('o.created', 'DESC')
+                ->orderBy('o.id', 'DESC')
                 ->setMaxResults(6);
         $query = $qb->getQuery();
         $offers = $query->execute(); /* @var $offers Offer[] */
@@ -152,7 +152,7 @@ class OfferManager extends AbstractManager {
         $qb = $this->repository->createQueryBuilder('o');
         $qb->where("o.published = ?1")
                 ->setParameter(1, true)
-                ->orderBy('o.created', 'DESC')
+                ->orderBy('o.id', 'DESC')
                 ->setFirstResult($offset)
                 ->setMaxResults(4);
         $query = $qb->getQuery();

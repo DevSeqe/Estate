@@ -13,11 +13,11 @@
     <parameters>
         <parameter key="bit2bit.mainbundle.manager.user.class">Bit2Bit\MainBundle\Manager\UserManager</parameter>
         <parameter key="bit2bit.mainbundle.entity.user.class">Bit2Bit\MainBundle\Entity\User</parameter>
-    </parameters>
+    <parameter key="bit2bit.mainbundle.manager.setting.class">Bit2Bit\MainBundle\Manager\SettingManager</parameter><parameter key="bit2bit.mainbundle.entity.setting.class">Bit2Bit\MainBundle\Entity\Setting</parameter></parameters>
     <services>
         <service id="bit2bit.mainbundle.user" class="%bit2bit.mainbundle.manager.user.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument>%bit2bit.mainbundle.entity.user.class%</argument>
         </service>
-    </services>
+    <service id="bit2bit.mainbundle.setting" class="%bit2bit.mainbundle.manager.setting.class%"><argument type="service" id="doctrine.orm.default_entity_manager"/><argument>%bit2bit.mainbundle.entity.setting.class%</argument></service></services>
 </container>
