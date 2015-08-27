@@ -47,13 +47,18 @@ class Offer extends Base {
         if (!empty($this->plan)) {
             return $this->plan;
         }
-        $catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan';
-        if (file_exists($catalog)) {
+        $catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'Plan';
+        $plan = 'Plan';
+        if (!file_exists($catalog)) {
+        	$catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan';
+        	$plan = 'plan';
+    	}
+    	if (!file_exists($catalog)) {
             if ($handle = opendir($catalog)) {
                 while (false !== ($entry = readdir($handle))) {
                     if ($entry != "." && $entry != "..") {
                         if (!is_dir($catalog . DIRECTORY_SEPARATOR . $entry)) {
-                            $this->plan = '/images/offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan' . DIRECTORY_SEPARATOR . $entry;
+                            $this->plan = '/images/offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . $plan . DIRECTORY_SEPARATOR . $entry;
                             break;
                         }
                     }
