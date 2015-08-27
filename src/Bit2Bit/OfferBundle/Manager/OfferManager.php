@@ -15,7 +15,8 @@ class OfferManager extends AbstractManager {
         }
         $qb = $this->repository->createQueryBuilder('o');
         $qb->where("o.published = ?1")
-                ->setParameter(1, true);
+                ->setParameter(1, true)
+                ->orderBy('o.id','DESC');
         if (isset($data['object_type'])) {
             $qb->andWhere("o.type = ?2")
                     ->setParameter(2, $data['object_type']);
