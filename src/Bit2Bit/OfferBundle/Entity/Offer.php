@@ -53,8 +53,8 @@ class Offer extends Base {
         	$catalog = getcwd() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'offer' . DIRECTORY_SEPARATOR . $this->getSlug() . DIRECTORY_SEPARATOR . 'plan';
         	$plan = 'plan';
     	}
-    	if (!file_exists($catalog)) {
-            if ($handle = opendir($catalog)) {
+    	if (file_exists($catalog)) {    		
+            if ($handle = opendir($catalog)) {            	
                 while (false !== ($entry = readdir($handle))) {
                     if ($entry != "." && $entry != "..") {
                         if (!is_dir($catalog . DIRECTORY_SEPARATOR . $entry)) {
