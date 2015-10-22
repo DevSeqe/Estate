@@ -83,7 +83,7 @@
                     "url": "http://cdn.datatables.net/plug-ins/1.10.7/i18n/Polish.json"
                 }
             });            
-            $('.btn-remove').on('click', function () {
+            $('#dt').on('click','.btn-remove', function () {
                 var row = $(this).closest('tr');
                 var name = row.find('td:nth-child(2)').text();
                 var url = $(this).data('url');
